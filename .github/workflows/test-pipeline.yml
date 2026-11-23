@@ -1,0 +1,21 @@
+name: Test pipeline (offline, free)
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg && pip install -q pillow
+      - name: Build a reel with placeholder media (no API calls)
+        env:
+          MOCK_GEMINI: "1"
+        run: |
+          python3 pipeline/make_story_reel.py --date 2000-01-01
+          ffprobe -v error -show_entries stream=codec_type,width,height -of csv=p=0 reels/2000-01-01/reel.mp4

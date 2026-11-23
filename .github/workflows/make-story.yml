@@ -1,0 +1,56 @@
+name: Make daily story reel (AI)
+
+on:
+  schedule:
+    - cron: "30 3 * * *"   # 03:30 UTC = 9:00 AM IST; the reel posts at 7 PM IST
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Date to make (YYYY-MM-DD). Empty = today (IST)."
+        required: false
+      days:
+        description: "How many days to make, starting at that date"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency: make-story
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ffmpeg and Pillow
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q pillow
+      - name: Make reel
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SCENES: ${{ vars.SCENES || '5' }}
+          RESOLUTION: ${{ vars.RESOLUTION || '720p' }}
+        run: |
+          ARGS="--days ${{ github.event.inputs.days || '1' }}"
+          if [ -n "${{ github.event.inputs.date }}" ]; then ARGS="$ARGS --date ${{ github.event.inputs.date }}"; fi
+          python3 pipeline/make_story_reel.py $ARGS
+      - name: Commit and push
+        if: always()
+        run: |
+          git config user.name "twin-heroes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add reels specs content
+          git diff --cached --quiet || (git commit -m "Story reel $(TZ=Asia/Kolkata date +%F)" && git push)
+      - name: Refresh GitHub Pages (so Instagram can download the video)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds || true

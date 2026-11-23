@@ -1,0 +1,26 @@
+name: Make character designs (one time)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate Veer and Veera
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 pipeline/make_characters.py
+      - name: Commit
+        run: |
+          git config user.name "twin-heroes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/characters
+          git diff --cached --quiet || (git commit -m "Character designs" && git push)

@@ -1,0 +1,4 @@
+work/
+review/
+__pycache__/
+*.wav

@@ -13,16 +13,32 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+
+concurrency: post-reel
+
 jobs:
   post:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Skip if this reel was already posted
+        id: guard
+        run: |
+          D="${{ github.event.inputs.post_date }}"; [ -z "$D" ] && D=$(TZ=Asia/Kolkata date +%F)
+          echo "date=$D" >> $GITHUB_OUTPUT
+          if [ -f "reels/$D/posted.txt" ] && [ "${{ github.event.inputs.dry_run }}" != "true" ]; then
+            echo "Reel for $D was already posted ($(cat reels/$D/posted.txt)). Nothing to do."; echo "skip=true" >> $GITHUB_OUTPUT
+          fi
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
       - name: Publish reel
+        if: steps.guard.outputs.skip != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: "17841417918269673"                 # @twin.heros Instagram account id
@@ -32,3 +48,11 @@ jobs:
           POST_DATE: ${{ github.event.inputs.post_date }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: java src/PostReel.java
+      - name: Remember that it was posted
+        if: steps.guard.outputs.skip != 'true' && github.event.inputs.dry_run != 'true' && hashFiles(format('reels/{0}/reel.mp4', steps.guard.outputs.date)) != ''
+        run: |
+          D="${{ steps.guard.outputs.date }}"
+          date -u +%FT%TZ > "reels/$D/posted.txt"
+          git config user.name "twin-heroes-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "reels/$D/posted.txt" && git commit -m "Posted reel $D" && git pull --rebase -q origin main && git push

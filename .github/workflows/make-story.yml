@@ -33,7 +33,7 @@ jobs:
       - name: Install ffmpeg and Pillow
         run: |
           sudo apt-get update -qq -o Acquire::Retries=3 && sudo apt-get install -y -qq --no-install-recommends ffmpeg
-          pip install -q pillow edge-tts
+          pip install -q pillow numpy edge-tts
       - name: Make reel
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

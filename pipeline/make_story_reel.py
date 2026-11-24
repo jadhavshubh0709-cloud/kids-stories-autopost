@@ -60,7 +60,9 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     spec = cartoon_writer.stage(story, durs, story_no)
     cartoon_writer.add_moral(spec, story, max(4.5, segs[-1][1] + 1.6))
     os.makedirs(os.path.join(ROOT, "specs"), exist_ok=True)
-    json.dump({"story": story, "cartoon": spec}, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)
+    spec_file = os.path.join(ROOT, "specs", f"{date}.json")
+    if os.path.exists(spec_file): spec_file = spec_file[:-5] + "-cartoon.json"     # a Veo story already owns this date
+    json.dump({"story": story, "cartoon": spec}, open(spec_file, "w"), indent=2, ensure_ascii=False)
     silent = os.path.join(work, "silent.mp4")
     cartoon_engine.render(spec, silent)
     # each narration line starts just after its scene starts

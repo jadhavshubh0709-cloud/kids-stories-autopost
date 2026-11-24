@@ -1,0 +1,57 @@
+name: Veo story - build reel from uploaded clips
+
+on:
+  push:
+    paths:
+      - "inbox/**"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Date (YYYY-MM-DD). Empty = every date whose 3 clips are uploaded."
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+
+concurrency: repo-writes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ffmpeg and Pillow
+        run: |
+          sudo apt-get update -qq -o Acquire::Retries=3 && sudo apt-get install -y -qq --no-install-recommends ffmpeg
+          pip install -q pillow numpy edge-tts
+      - name: Add voice, subtitles, title, lesson and music
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          ARGS=""; [ -n "${{ github.event.inputs.date }}" ] && ARGS="--date ${{ github.event.inputs.date }}"
+          python3 pipeline/clip_story.py build $ARGS
+      - name: Commit the reel (raw clips are removed to keep the repo small)
+        run: |
+          git config user.name "kahani-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for d in reels/*/; do D=$(basename "$d"); if [ -f "reels/$D/reel.mp4" ] && [ -d "inbox/$D" ]; then git rm -r -q "inbox/$D"; echo "$D" >> /tmp/done.txt; fi; done
+          git add reels
+          git diff --cached --quiet || (git commit -m "Veo reel ready" && git pull --rebase -q origin main && git push)
+      - name: Refresh Pages and close the reminder
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X POST repos/${{ github.repository }}/pages/builds || true
+          for D in $(cat /tmp/done.txt 2>/dev/null); do
+            N=$(gh issue list --state open --search "in:title \"Make today's 3 clips: $D\"" --json number --jq '.[0].number')
+            [ -n "$N" ] && gh issue close "$N" --comment "Reel ready: https://github.com/${{ github.repository }}/blob/main/reels/$D/reel.mp4 . It posts at 7 PM IST."
+          done

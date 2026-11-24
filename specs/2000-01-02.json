@@ -1,0 +1,401 @@
+{
+  "story": {
+    "title": "Aarav Tells The Truth",
+    "cast": [
+      "aarav",
+      "meera"
+    ],
+    "moral_line": "Always tell the truth",
+    "question": "How do you encourage your child to be honest when they make a mistake?",
+    "music": "playful",
+    "caption": "Aarav learned an important lesson today! 😋✨\n\nHow do you encourage your child to be honest when they make a mistake?\n\nA new story every day ✨ Follow @kahani.time.kids\n\n#parenting #kidsstories #moralstories #indianparents #toddlerlife #honesty #storytime #kahanitimekids",
+    "scenes": [
+      {
+        "bg": "home",
+        "narration": "Meera places three sweet laddoos on the table. Aarav sees the tasty treats.",
+        "chars": [
+          {
+            "who": "meera",
+            "place": "left",
+            "action": "wave",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "place": "right",
+            "action": "bounce",
+            "mood": "smile"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "state": "three",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "meera",
+            "text": "Laddoos are ready!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Aarav eats one laddoo quickly. Oh no, now there are only two laddoos left!",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "centre",
+            "action": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "state": "two",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "aarav",
+            "text": "It was tasty!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Meera comes back and spots the missing laddoo. Aarav tells the truth bravely.",
+        "chars": [
+          {
+            "who": "meera",
+            "place": "left",
+            "action": "point",
+            "mood": "surprised"
+          },
+          {
+            "who": "aarav",
+            "place": "right",
+            "action": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "state": "two",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "meera",
+            "text": "Where is one?"
+          },
+          {
+            "who": "aarav",
+            "text": "I ate it!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Meera smiles at Aarav for being honest. Telling the truth makes everyone happy.",
+        "chars": [
+          {
+            "who": "meera",
+            "place": "left",
+            "action": "bounce",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "place": "right",
+            "action": "hero",
+            "mood": "smile"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "state": "two",
+            "place": "table"
+          },
+          {
+            "kind": "heart",
+            "place": "ground_centre",
+            "motion": "float"
+          }
+        ],
+        "say": [
+          {
+            "who": "meera",
+            "text": "You are honest!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Aarav and Meera happily share the rest of the sweet laddoos together.",
+        "chars": [
+          {
+            "who": "meera",
+            "place": "centre_left",
+            "action": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "place": "centre_right",
+            "action": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "state": "one",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "aarav",
+            "text": "Truth is good!"
+          }
+        ],
+        "sparkle": true
+      }
+    ],
+    "story_no": 2,
+    "moral": "honesty"
+  },
+  "cartoon": {
+    "title": "Aarav Tells The Truth",
+    "story_no": 2,
+    "cast": [
+      "aarav",
+      "meera"
+    ],
+    "scenes": [
+      {
+        "type": "title",
+        "bg": "home",
+        "dur": 3.0
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 8.42,
+        "text": "Meera places three sweet laddoos on the table. Aarav sees the tasty treats.",
+        "chars": [
+          {
+            "who": "meera",
+            "x": 260,
+            "act": "wave",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "x": 820,
+            "act": "bounce",
+            "mood": "smile"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1340,
+            "layer": "front",
+            "state": "three"
+          }
+        ],
+        "say": [
+          {
+            "text": "Laddoos are ready!",
+            "at": 0.3,
+            "who": "meera"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 8.58,
+        "text": "Aarav eats one laddoo quickly. Oh no, now there are only two laddoos left!",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 540,
+            "act": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1380,
+            "layer": "front",
+            "state": "two"
+          }
+        ],
+        "say": [
+          {
+            "text": "It was tasty!",
+            "at": 0.3,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 7.73,
+        "text": "Meera comes back and spots the missing laddoo. Aarav tells the truth bravely.",
+        "chars": [
+          {
+            "who": "meera",
+            "x": 260,
+            "act": "point",
+            "mood": "surprised"
+          },
+          {
+            "who": "aarav",
+            "x": 820,
+            "act": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1340,
+            "layer": "front",
+            "state": "two"
+          }
+        ],
+        "say": [
+          {
+            "text": "Where is one?",
+            "at": 0.3,
+            "who": "meera"
+          },
+          {
+            "text": "I ate it!",
+            "at": 1.7,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 7.46,
+        "text": "Meera smiles at Aarav for being honest. Telling the truth makes everyone happy.",
+        "chars": [
+          {
+            "who": "meera",
+            "x": 260,
+            "act": "bounce",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "x": 820,
+            "act": "hero",
+            "mood": "smile"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1340,
+            "layer": "front",
+            "state": "two"
+          },
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 1340,
+            "layer": "front",
+            "anim": "float"
+          }
+        ],
+        "say": [
+          {
+            "text": "You are honest!",
+            "at": 0.3,
+            "who": "meera"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 7.14,
+        "text": "Aarav and Meera happily share the rest of the sweet laddoos together.",
+        "chars": [
+          {
+            "who": "meera",
+            "x": 390,
+            "act": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "aarav",
+            "x": 690,
+            "act": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1380,
+            "layer": "front",
+            "state": "one"
+          }
+        ],
+        "say": [
+          {
+            "text": "Truth is good!",
+            "at": 0.3,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "moral",
+        "bg": "home",
+        "dur": 4.5,
+        "text": "Always tell the truth",
+        "question": "How do you encourage your child to be honest when they make a mistake?"
+      }
+    ],
+    "bg_images": {
+      "home": "/home/runner/work/kids-stories-autopost/kids-stories-autopost/work/2000-01-02/bg_home.jpg"
+    }
+  }
+}

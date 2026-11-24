@@ -4,5 +4,15 @@
     "story_no": 1,
     "title": "The Sweet Sharing Surprise",
     "moral": "sharing"
+  },
+  {
+    "date": "2000-01-02",
+    "story_no": 2,
+    "title": "Aarav Tells The Truth",
+    "moral": "honesty",
+    "cast": [
+      "aarav",
+      "meera"
+    ]
   }
 ]

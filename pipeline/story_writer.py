@@ -38,6 +38,7 @@ Return JSON only, with this exact shape:
   "caption": "Instagram caption: 1 hook line with 1-2 emoji, blank line, a question for parents, blank line, 'A new Twin Heroes story every day ✨ Follow @twin.heros', blank line, 8 hashtags ending with #twinheros",
   "scenes": [
     {{"visual": "what the camera shows in this 8-second shot: where they are, what Veer and Veera DO, facial expressions, any animal or object, camera move. 40-70 words. Describe the twins by name AND appearance.",
+      "picture": "ONE short sentence (15-30 words) for a single picture of this moment: who is in it, the key object or animal (e.g. a big yellow mango, a small squirrel), the action, and the place. Name both twins as 'the twins' or 'Veer'/'Veera'.",
       "sound": "ambient sounds only, e.g. birds chirping, soft wind",
       "narration": "what the storyteller says over this shot: 1-2 very simple sentences, 8-18 words, present or past tense"}}
   ]
@@ -72,11 +73,18 @@ def validate(s, n):
     return errs
 
 
+TWINS_SHORT = ("two small 6-year-old Indian twin children (a boy and a girl, same height, chubby cheeks), both dressed as "
+               "little superheroes: the boy Veer has short spiky black hair, a blue superhero suit, a red cape and a small blue eye mask; "
+               "the girl Veera has two black ponytails with yellow bows, a pink superhero suit, a yellow cape and a pink eye mask")
+
+
 def image_prompt(scene):
-    """Prompt for one free still picture (FLUX)."""
-    return ("3D animated movie still, cute stylized family-film look, highly detailed, soft cinematic lighting, "
-            "bright warm colours, depth of field, characters in the centre of the frame, no text, no letters, no watermark. "
-            f"Characters: {CHARACTERS} Scene: {scene['visual']}")
+    """Prompt for one free still picture (FLUX). The action comes first: FLUX follows the start of a prompt most closely."""
+    pic = scene.get("picture") or scene["visual"]
+    return (f"Pixar-style 3D animated movie still. {pic} "
+            f"The children are {TWINS_SHORT}. Only children and animals, no adults. "
+            "Full bodies visible, characters in the centre, cute cartoon proportions, big expressive eyes, bright colours, "
+            "soft cinematic lighting, highly detailed, no text, no letters, no watermark.")
 
 
 def video_prompt(scene):

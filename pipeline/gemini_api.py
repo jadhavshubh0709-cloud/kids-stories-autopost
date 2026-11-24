@@ -74,7 +74,14 @@ def generate_json(prompt, temperature=1.0):
         return json.loads(json.dumps(MOCK_STORY))
     body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}],
             "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}}
-    resp = call("POST", f"models/{TEXT_MODEL}:generateContent", body, timeout=180)
+    models = [TEXT_MODEL] + [m for m in os.environ.get("TEXT_FALLBACKS", "gemini-flash-latest,gemini-flash-lite-latest").split(",") if m and m != TEXT_MODEL]
+    resp, err = None, None
+    for m in models:
+        try:
+            resp = call("POST", f"models/{m}:generateContent", body, timeout=180); break
+        except ApiError as e:
+            err = e; print(f"  {m} unavailable ({str(e)[:80]}...), trying the next model", flush=True)
+    if resp is None: raise err
     text = "".join(p.get("text", "") for p in _parts(resp))
     try:
         return json.loads(text)

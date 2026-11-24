@@ -53,7 +53,7 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     lines = [sc["narration"].strip() for sc in story["scenes"]] + [f"Remember, {story['moral_line']}"]
     full = os.path.join(work, "voice_full.wav")
     gemini_api.narrate("  ...  ".join(lines), full)
-    segs = assemble.split_by_pauses(full, len(lines), work)      # [(wav, seconds)] one per line
+    segs = assemble.split_by_pauses(full, len(lines), work, [len(l.split()) for l in lines])      # [(wav, seconds)] one per line
     durs = [max(3.4, L + 0.9) for _, L in segs[:-1]]
     spec = cartoon_writer.stage(story, durs, story_no)
     cartoon_writer.add_moral(spec, story, max(4.5, segs[-1][1] + 1.6))

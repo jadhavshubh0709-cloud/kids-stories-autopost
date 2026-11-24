@@ -197,26 +197,40 @@ def mix_voices(silent_video, voices, music_path, out_mp4):
 
 
 
-def split_by_pauses(src, n, work):
-    """Split one narration recording into n lines at the n-1 longest pauses (we put a pause between lines).
-    Returns [(wav_path, length_seconds)]. Falls back to equal-word timing if pauses can't be found."""
+def split_by_pauses(src, n, work, weights=None):
+    """Split one narration recording into n lines. For each line break we look for the longest pause NEAR where
+    that line should end (estimated from its word count), so pauses inside a sentence don't confuse the split.
+    Returns [(wav_path, length_seconds)]."""
     import array, wave
     with wave.open(src) as w:
         rate, ch, frames = w.getframerate(), w.getnchannels(), w.getnframes()
         pcm = array.array("h", w.readframes(frames))
     mono = pcm[::ch]; step = int(0.02 * rate)
-    energy = [max(abs(v) for v in mono[i:i + step]) if mono[i:i + step] else 0 for i in range(0, len(mono), step)]
-    peak = max(energy) or 1; thr = peak * 0.04
-    runs, start = [], None
+    energy = [max((abs(v) for v in mono[i:i + step]), default=0) for i in range(0, len(mono), step)]
+    peak = max(energy) or 1; thr = peak * 0.05
+    runs, start = [], None                                   # silent stretches: (start_s, end_s)
     for k, e in enumerate(energy + [peak]):
         if e < thr and start is None: start = k
         elif e >= thr and start is not None:
-            if start > 0 and k < len(energy): runs.append((k - start, start, k))
+            if start > 0 and k < len(energy) and (k - start) >= 6: runs.append((start * 0.02, k * 0.02))
             start = None
     total = len(mono) / rate
-    cuts = sorted(((a + b) / 2 * 0.02) for _, a, b in sorted(runs, reverse=True)[:n - 1])
-    if len(cuts) < n - 1:
-        cuts = [total * (i + 1) / n for i in range(n - 1)]
+    # trim leading/trailing silence from the estimate
+    voiced = [k for k, e in enumerate(energy) if e >= thr]
+    t0, t1 = (voiced[0] * 0.02, voiced[-1] * 0.02 + 0.02) if voiced else (0, total)
+    weights = weights or [1] * n
+    cum, acc = [], 0
+    for w_ in weights[:-1]:
+        acc += w_; cum.append(t0 + (t1 - t0) * acc / sum(weights))
+    window = (t1 - t0) / n * 0.45
+    cuts, prev = [], t0
+    for e in cum:
+        cands = [(b - a, (a + b) / 2) for a, b in runs if (a + b) / 2 > prev + 0.5 and abs((a + b) / 2 - e) <= window]
+        if cands:
+            mid = max(cands, key=lambda c: c[0] - 0.15 * abs(c[1] - e))[1]
+        else:
+            mid = max(e, prev + 0.5)
+        cuts.append(mid); prev = mid
     edges = [0.0] + cuts + [total]
     out = []
     for i in range(n):
@@ -224,4 +238,5 @@ def split_by_pauses(src, n, work):
         run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-ss", f"{edges[i]:.3f}", "-to", f"{edges[i + 1]:.3f}",
              "-af", "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", seg])
         out.append((seg, duration(seg)))
+    print("  narration split at:", ", ".join(f"{c:.1f}s" for c in cuts), f"(total {total:.1f}s)", flush=True)
     return out

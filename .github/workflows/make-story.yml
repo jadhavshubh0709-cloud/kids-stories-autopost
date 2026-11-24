@@ -1,5 +1,7 @@
-name: Make daily story reel (AI)
+name: Make daily story reel
 
+# FREE by default (VIDEO_MODE=stills): Gemini free tier (story + voice) + Cloudflare free pictures.
+# Paid AI video instead: add repo variable VIDEO_MODE=ai and turn on Gemini billing.
 on:
   schedule:
     - cron: "30 3 * * *"   # 03:30 UTC = 9:00 AM IST; the reel posts at 7 PM IST
@@ -35,6 +37,9 @@ jobs:
       - name: Make reel
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          VIDEO_MODE: ${{ vars.VIDEO_MODE || 'stills' }}
           SCENES: ${{ vars.SCENES || '5' }}
           RESOLUTION: ${{ vars.RESOLUTION || '720p' }}
         run: |

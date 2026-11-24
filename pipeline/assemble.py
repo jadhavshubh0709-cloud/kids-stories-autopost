@@ -157,3 +157,23 @@ def build_reel(story, clips, voices, moral_voice, work, out_mp4, music_path):
          "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", str(total),
          "-movflags", "+faststart", out_mp4])
     return total
+
+
+def still_to_clip(img, out, direction=0, dur=12.0):
+    """Free 'moving storybook' shot: slow camera pan across an AI picture (any size) to fill 1080x1920."""
+    iw, ih = Image.open(img).size
+    s = max(W / iw, H / ih) * 1.12
+    sw, sh = int(iw * s) // 2 * 2, int(ih * s) // 2 * 2
+    ex, ey = sw - W, sh - H                       # how far the camera can travel
+    p = f"(t/{dur})"
+    if direction % 4 == 0:   x, y = f"{ex}*(0.3+0.4*{p})", f"{ey}/2"          # pan right
+    elif direction % 4 == 1: x, y = f"{ex}*(0.7-0.4*{p})", f"{ey}/2"          # pan left
+    elif direction % 4 == 2: x, y = f"{ex}/2", f"{ey}*(0.9-0.8*{p})"           # tilt up
+    else:                    x, y = f"{ex}*(0.35+0.3*{p})", f"{ey}*(0.3+0.4*{p})"  # diagonal
+    big = out + ".big.png"                        # pre-scale once (2x) so every frame is just a smooth crop
+    Image.open(img).convert("RGB").resize((sw * 2, sh * 2), Image.LANCZOS).save(big)
+    run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", big,
+         "-vf", f"crop={W * 2}:{H * 2}:x='2*({x})':y='2*({y})',scale={W}:{H}:flags=bicubic,fps={FPS},format=yuv420p",
+         "-t", str(dur), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", out])
+    os.remove(big)
+    return out

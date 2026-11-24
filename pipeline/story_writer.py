@@ -72,6 +72,13 @@ def validate(s, n):
     return errs
 
 
+def image_prompt(scene):
+    """Prompt for one free still picture (FLUX)."""
+    return ("3D animated movie still, cute stylized family-film look, highly detailed, soft cinematic lighting, "
+            "bright warm colours, depth of field, characters in the centre of the frame, no text, no letters, no watermark. "
+            f"Characters: {CHARACTERS} Scene: {scene['visual']}")
+
+
 def video_prompt(scene):
     return (f"{STYLE}\nCharacters (match the reference images exactly): {CHARACTERS}\n"
             f"Shot: {scene['visual']}\nSound: {scene.get('sound', 'soft ambient sounds')}. No dialogue.")

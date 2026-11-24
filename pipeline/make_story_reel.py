@@ -12,7 +12,7 @@ import argparse, datetime as dt, glob, json, os, shutil, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
-import gemini_api, story_writer, assemble
+import gemini_api, images_api, story_writer, assemble
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 HISTORY = os.path.join(ROOT, "content", "history.json")
@@ -61,13 +61,23 @@ def make_one(date):
     json.dump(story, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)
     print(f"  Story #{story['story_no']}: {story['title']}", flush=True)
 
+    mode = os.environ.get("VIDEO_MODE", "stills")   # stills = free pictures + camera moves; ai = paid AI video
+    seed = 1000 + story["story_no"] * 7              # same seed for the whole story keeps the look consistent
     clips, voices = [], []
     for i, sc in enumerate(story["scenes"]):
-        print(f"  scene {i + 1}/{n}: clip + voice", flush=True)
+        print(f"  scene {i + 1}/{n}: {'picture' if mode == 'stills' else 'clip'} + voice", flush=True)
         c = os.path.join(work, f"clip{i}.mp4")
-        if not os.path.exists(c): make_clip_with_retry(story_writer.video_prompt(sc), refs, c, res)
+        if not os.path.exists(c):
+            if mode == "ai":
+                make_clip_with_retry(story_writer.video_prompt(sc), refs, c, res)
+            else:
+                img = os.path.join(work, f"scene{i}.jpg")
+                images_api.generate_still(story_writer.image_prompt(sc), img, seed + i)
+                assemble.still_to_clip(img, c, direction=i)
         v = os.path.join(work, f"voice{i}.wav")
-        if not os.path.exists(v): gemini_api.narrate(sc["narration"], v)
+        if not os.path.exists(v):
+            gemini_api.narrate(sc["narration"], v)
+            if not gemini_api.MOCK: time.sleep(int(os.environ.get("TTS_PAUSE", "7")))   # stay under free-tier limits
         clips.append(c); voices.append(v)
     mv = os.path.join(work, "voice_moral.wav")
     gemini_api.narrate(f"Remember, {story['moral_line']}", mv)

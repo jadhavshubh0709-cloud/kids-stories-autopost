@@ -12,7 +12,7 @@ import argparse, datetime as dt, glob, json, os, shutil, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
-import gemini_api, images_api, story_writer, assemble
+import gemini_api, images_api, story_writer, assemble, cartoon_engine, cartoon_writer
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 HISTORY = os.path.join(ROOT, "content", "history.json")
@@ -41,6 +41,42 @@ def make_clip_with_retry(prompt, refs, out, resolution):
     raise last
 
 
+def make_cartoon(date, moral, history, n, work, out_dir):
+    """FREE default: AI story + AI staging -> animated cartoon (characters really move) + free AI narrator."""
+    story = cartoon_writer.write(moral, [h["title"] for h in history], n)
+    story_no = (history[-1]["story_no"] + 1) if history else 1
+    story.update(story_no=story_no, moral=moral)
+    if story.get("music") not in ("playful", "gentle", "adventure"): story["music"] = "playful"
+    if "#twinheros" not in story["caption"]: story["caption"] = story["caption"].rstrip() + " #twinheros"
+    print(f"  Story #{story_no}: {story['title']}", flush=True)
+    voices, durs = [], []
+    for i, sc in enumerate(story["scenes"]):
+        v = os.path.join(work, f"voice{i}.wav")
+        gemini_api.narrate(sc["narration"], v)
+        if not gemini_api.MOCK: time.sleep(int(os.environ.get("TTS_PAUSE", "7")))
+        voices.append(v); durs.append(max(3.6, assemble.duration(v) + 1.0))
+    mv = os.path.join(work, "voice_moral.wav")
+    gemini_api.narrate(f"Remember, {story['moral_line']}", mv)
+    spec = cartoon_writer.stage(story, durs, story_no)
+    cartoon_writer.add_moral(spec, story, max(4.5, assemble.duration(mv) + 1.4))
+    os.makedirs(os.path.join(ROOT, "specs"), exist_ok=True)
+    json.dump({"story": story, "cartoon": spec}, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)
+    silent = os.path.join(work, "silent.mp4")
+    cartoon_engine.render(spec, silent)
+    starts, t = [], 0.0
+    for s in spec["scenes"]:
+        starts.append(t); t += s["dur"]
+    tracks = [(v, starts[i + 1] + 0.3) for i, v in enumerate(voices)] + [(mv, starts[-1] + 0.4)]
+    os.makedirs(out_dir, exist_ok=True)
+    total = assemble.mix_voices(silent, tracks, os.path.join(ROOT, "music", story["music"] + ".m4a"), os.path.join(out_dir, "reel.mp4"))
+    open(os.path.join(out_dir, "caption.txt"), "w").write(story["caption"].strip() + "\n")
+    history.append({"date": date, "story_no": story_no, "title": story["title"], "moral": moral})
+    json.dump(history, open(HISTORY, "w"), indent=2, ensure_ascii=False)
+    shutil.rmtree(work, ignore_errors=True)
+    print(f"  done: reels/{date}/reel.mp4 ({total:.1f}s, cartoon)", flush=True)
+    return True
+
+
 def make_one(date):
     out_dir = os.path.join(ROOT, "reels", date)
     if os.path.exists(os.path.join(out_dir, "reel.mp4")):
@@ -54,6 +90,8 @@ def make_one(date):
 
     moral = pick_moral(history)
     print(f"{date}: writing a story about '{moral}'", flush=True)
+    if os.environ.get("VIDEO_MODE", "cartoon") == "cartoon":
+        return make_cartoon(date, moral, history, n, work, out_dir)
     story = story_writer.write_story(moral, [h["title"] for h in history], n)
     story["story_no"] = (history[-1]["story_no"] + 1) if history else 1
     story["moral"] = moral
@@ -61,7 +99,7 @@ def make_one(date):
     json.dump(story, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)
     print(f"  Story #{story['story_no']}: {story['title']}", flush=True)
 
-    mode = os.environ.get("VIDEO_MODE", "stills")   # stills = free pictures + camera moves; ai = paid AI video
+    mode = os.environ.get("VIDEO_MODE", "cartoon")   # stills = free pictures + camera moves; ai = paid AI video
     seed = 1000 + story["story_no"] * 7              # same seed for the whole story keeps the look consistent
     clips, voices = [], []
     for i, sc in enumerate(story["scenes"]):

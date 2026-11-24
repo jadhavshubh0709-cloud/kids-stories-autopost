@@ -177,3 +177,20 @@ def still_to_clip(img, out, direction=0, dur=12.0):
          "-t", str(dur), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", out])
     os.remove(big)
     return out
+
+
+def mix_voices(silent_video, voices, music_path, out_mp4):
+    """voices: list of (wav_path, start_seconds). Narration on top, background music quietly underneath."""
+    total = duration(silent_video)
+    inputs = ["-i", silent_video, "-stream_loop", "-1", "-i", music_path]
+    parts = []
+    for k, (wav, start) in enumerate(voices):
+        inputs += ["-i", wav]; ms = int(start * 1000)
+        parts.append(f"[{k + 2}:a]aresample=48000,aformat=channel_layouts=stereo,adelay={ms}|{ms}[v{k}]")
+    mixv = "".join(f"[v{k}]" for k in range(len(voices)))
+    fc = ";".join(parts) + (f";{mixv}amix=inputs={len(voices)}:normalize=0[nar];" if voices else "") + \
+         f"[1:a]aresample=48000,aformat=channel_layouts=stereo,volume=0.18,atrim=0:{total},afade=t=out:st={max(0, total - 1.5)}:d=1.5[m];" + \
+         (f"[nar][m]amix=inputs=2:normalize=0:duration=longest," if voices else "[m]") + f"loudnorm=I=-16:TP=-1.5,atrim=0:{total}[a]"
+    run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", fc, "-map", "0:v", "-map", "[a]",
+         "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", str(total), "-movflags", "+faststart", out_mp4])
+    return total

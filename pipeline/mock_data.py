@@ -23,6 +23,21 @@ MOCK_STORY = {
 }
 
 
+STAGING = [
+    {"bg": "home", "veer": {"place": "left", "action": "walk", "walk_to": "centre_left", "mood": "surprised"},
+     "veera": {"place": "right", "action": "idle", "mood": "surprised"}, "props": [{"kind": "plate", "state": "one", "place": "table"}]},
+    {"bg": "home", "veer": {"place": "left", "action": "point", "mood": "cross"}, "veera": {"place": "right", "action": "point", "mood": "cross"},
+     "props": [{"kind": "plate", "state": "one", "place": "table"}], "say": [{"who": "veer", "text": "It's mine!"}, {"who": "veera", "text": "No, mine!"}]},
+    {"bg": "home", "veer": {"place": "left", "action": "idle", "mood": "surprised"}, "veera": {"place": "right", "action": "droop", "mood": "sad"},
+     "props": [{"kind": "plate", "state": "one", "place": "table"}, {"kind": "bird", "place": "window", "motion": "arrive"}], "say": [{"who": "prop", "text": "Chirp..."}]},
+    {"bg": "home", "veer": {"place": "left", "action": "idle", "mood": "smile"}, "veera": {"place": "right", "action": "wave", "mood": "happy"},
+     "props": [{"kind": "plate", "state": "three", "place": "table"}, {"kind": "bird", "place": "window", "motion": "hop"}], "say": [{"who": "veera", "text": "Let's share!"}]},
+    {"bg": "park", "veer": {"place": "left", "action": "jump", "mood": "happy"}, "veera": {"place": "right", "action": "jump", "mood": "happy"},
+     "props": [{"kind": "bird", "place": "sky", "motion": "bob"}, {"kind": "heart", "place": "sky", "motion": "float"}], "sparkle": True},
+]
+for _sc, _st in zip(MOCK_STORY["scenes"], STAGING): _sc.update(_st)
+
+
 def mock_clip(prompt, out):
     n = abs(hash(prompt)) % 5
     colors = ["0xf4a261", "0x2a9d8f", "0xe76f51", "0x8ab17d", "0x6d597a"][n]

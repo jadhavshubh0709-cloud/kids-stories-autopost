@@ -8,7 +8,7 @@ ROOT = os.path.join(HERE, "..")
 FONT_DIR = os.path.join(ROOT, "assets", "fonts")
 INK = (52, 36, 60)
 YELLOW = (255, 200, 40)
-HANDLE = "@twin.heros"
+HANDLE = "@kahani.time.kids"
 INTRO = 2.6        # seconds of title over the first clip (cover frame is taken at 2.0 s)
 
 
@@ -71,7 +71,7 @@ def title_png(title, story_no, path):
     for y in range(820): sd.line([(0, y), (W, y)], fill=(20, 10, 40, int(150 * (1 - y / 820))))
     img.alpha_composite(shade)
     pill(d, f"STORY #{story_no}")
-    f1 = font(130); t = "TWIN HEROES"; outlined(d, ((W - d.textlength(t, font=f1)) / 2, 270), t, f1, (255, 210, 50), 10)
+    f1 = font(130); t = "KAHANI TIME"; outlined(d, ((W - d.textlength(t, font=f1)) / 2, 270), t, f1, (255, 210, 50), 10)
     f2 = font(84); y = 450
     for ln in wrap(d, title, f2, 960):
         outlined(d, ((W - d.textlength(ln, font=f2)) / 2, y), ln, f2, (255, 255, 255), 8); y += 104

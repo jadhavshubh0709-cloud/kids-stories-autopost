@@ -35,7 +35,7 @@ Return JSON only, with this exact shape:
   "moral_line": "the lesson in at most 6 simple words, e.g. Sharing makes happiness bigger!",
   "question": "one short question for parents to answer in the comments",
   "music": "playful" or "gentle" or "adventure",
-  "caption": "Instagram caption: 1 hook line with 1-2 emoji, blank line, a question for parents, blank line, 'A new Twin Heroes story every day ✨ Follow @twin.heros', blank line, 8 hashtags ending with #twinheros",
+  "caption": "Instagram caption: 1 hook line with 1-2 emoji, blank line, a question for parents, blank line, 'A new story every day ✨ Follow @kahani.time.kids', blank line, 8 hashtags ending with #kahanitimekids",
   "scenes": [
     {{"visual": "what the camera shows in this 8-second shot: where they are, what Veer and Veera DO, facial expressions, any animal or object, camera move. 40-70 words. Describe the twins by name AND appearance.",
       "picture": "ONE short sentence (15-30 words) for a single picture of this moment: who is in it, the key object or animal (e.g. a big yellow mango, a small squirrel), the action, and the place. Name both twins as 'the twins' or 'Veer'/'Veera'.",
@@ -69,7 +69,7 @@ def validate(s, n):
         w = len(str(x.get("narration", "")).split())
         if not 4 <= w <= 24: errs.append(f"scene {i+1} narration has {w} words")
         if len(str(x.get("visual", "")).split()) < 15: errs.append(f"scene {i+1} visual too short")
-    if "#twinheros" not in s.get("caption", ""): s["caption"] = s.get("caption", "").rstrip() + " #twinheros"
+    if "#kahanitimekids" not in s.get("caption", ""): s["caption"] = s.get("caption", "").rstrip() + " #kahanitimekids"
     return errs
 
 

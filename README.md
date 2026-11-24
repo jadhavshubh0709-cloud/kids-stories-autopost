@@ -1,8 +1,9 @@
-# kids-stories-autopost: free daily AI story reels for @twin.heros
+# kids-stories-autopost: free daily AI story reels for @kahani.time.kids
 
 Every day, automatically and **free**:
-- **9 AM IST**: AI writes a new moral story starring Veer and Veera. It makes a 3D-style picture for each scene
-  with slow camera movement, records a narrator voice, and builds a 30-45 s reel with title, subtitles, music and a "story lesson" ending.
+- **9 AM IST**: AI writes a new moral story with a fresh cast (children, the hero twins, or animal friends like Gappu the
+  baby elephant), stages it as a moving cartoon, records a narrator voice, and builds a 30-45 s reel with title,
+  read-along subtitles, music and a "story lesson" ending.
   It is saved in `reels/<date>/`.
 - **7 PM IST**: the reel is posted to Instagram.
 

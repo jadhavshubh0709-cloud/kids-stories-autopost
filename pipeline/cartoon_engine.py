@@ -11,7 +11,8 @@ from PIL import Image, ImageDraw, ImageFont
 W, H, FPS = 1080, 1920, 30
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 FONT_DIR = os.path.join(ROOT, "assets", "fonts")
-HANDLE = "@twin.heros"
+HANDLE = "@kahani.time.kids"
+BRAND = "KAHANI TIME"
 GROUND = 1330
 INK = (52, 36, 60)
 
@@ -64,6 +65,45 @@ def bg_base(kind):
             d.ellipse([350*s, 1020*s, 1500*s, 1560*s], fill=(35, 60, 62))
             d.rectangle([0, 1250*s, W*s, H*s], fill=(45, 80, 75))
         img.alpha_composite(aa(f, (W, H)))
+    elif kind == "village":
+        img = grad((140, 205, 250), (250, 225, 180)).convert("RGBA")
+        def f(d, s):
+            d.ellipse([90*s, 170*s, 250*s, 330*s], fill=(255, 200, 80))
+            d.ellipse([-200*s, 950*s, 1300*s, 1400*s], fill=(150, 190, 100))
+            for x0, w, col in ((60, 300, (220, 160, 110)), (700, 320, (230, 175, 120))):
+                d.rectangle([x0*s, 880*s, (x0 + w)*s, 1180*s], fill=col)
+                d.polygon([((x0 - 40)*s, 890*s), ((x0 + w/2)*s, 700*s), ((x0 + w + 40)*s, 890*s)], fill=(190, 120, 60))
+                d.rounded_rectangle([(x0 + w/2 - 45)*s, 1020*s, (x0 + w/2 + 45)*s, 1180*s], 30*s, fill=(120, 80, 50))
+            d.rectangle([0, 1250*s, W*s, H*s], fill=(215, 175, 120))
+            for x in range(40, W, 160): d.ellipse([x*s, 1290*s, (x + 40)*s, 1305*s], fill=(195, 155, 105))
+        img.alpha_composite(aa(f, (W, H)))
+    elif kind == "school":
+        img = grad((250, 245, 225), (240, 232, 205)).convert("RGBA")
+        def f(d, s):
+            d.rounded_rectangle([160*s, 300*s, 920*s, 760*s], 20*s, fill=(150, 110, 70))
+            d.rounded_rectangle([185*s, 325*s, 895*s, 735*s], 12*s, fill=(45, 95, 70))
+            d.arc([260*s, 420*s, 420*s, 560*s], 200, 340, fill=(240, 240, 240), width=6*s)       # chalk doodles, no text
+            d.ellipse([600*s, 430*s, 700*s, 530*s], outline=(240, 240, 240), width=6*s)
+            d.line([480*s, 600*s, 820*s, 600*s], fill=(240, 240, 240), width=5*s)
+            for x in (60, 960): d.ellipse([(x - 40)*s, 820*s, (x + 40)*s, 900*s], fill=(120, 190, 120))
+            d.rectangle([0, 1250*s, W*s, H*s], fill=(190, 170, 140))
+            d.rounded_rectangle([380*s, 1150*s, 700*s, 1200*s], 14*s, fill=(170, 120, 80))
+            d.rectangle([400*s, 1200*s, 425*s, 1290*s], fill=(140, 95, 60)); d.rectangle([655*s, 1200*s, 680*s, 1290*s], fill=(140, 95, 60))
+        img.alpha_composite(aa(f, (W, H)))
+    elif kind == "jungle":
+        img = grad((120, 200, 170), (200, 240, 200)).convert("RGBA")
+        def f(d, s):
+            r = random.Random(7)
+            for _ in range(14):
+                x, y, rr = r.randint(-50, W + 50), r.randint(200, 900), r.randint(90, 170)
+                d.ellipse([(x - rr)*s, (y - rr)*s, (x + rr)*s, (y + rr)*s], fill=r.choice([(40, 130, 70), (60, 150, 80), (30, 110, 60)]))
+            for x in (120, 480, 930):
+                d.rounded_rectangle([(x - 28)*s, 700*s, (x + 28)*s, 1260*s], 14*s, fill=(110, 75, 45))
+            for x in (300, 700): d.line([x*s, 0, (x + 30)*s, 600*s], fill=(70, 140, 70), width=8*s)
+            d.rectangle([0, 1250*s, W*s, H*s], fill=(90, 160, 90))
+            for x in range(10, W, 90):
+                d.polygon([(x*s, 1260*s), ((x + 20)*s, 1200*s), ((x + 40)*s, 1260*s)], fill=(60, 140, 70))
+        img.alpha_composite(aa(f, (W, H)))
     else:  # home
         img = grad((255, 236, 210), (255, 222, 190)).convert("RGBA")
         def f(d, s):
@@ -94,10 +134,26 @@ def clouds(img, t, kind):
 
 
 # ---------------------------------------------------------------- characters
-KIDS = {
-    "veer":  {"suit": (60, 120, 230), "cape": (230, 60, 60), "skin": (205, 150, 110), "hair": (40, 30, 35), "belt": (255, 210, 60)},
-    "veera": {"suit": (235, 90, 160), "cape": (255, 200, 40), "skin": (205, 150, 110), "hair": (40, 30, 35), "belt": (120, 220, 255)},
+CAST = {
+    # children (no adults are ever drawn)
+    "veer":  {"kind": "kid", "name": "Veer", "desc": "6-year-old boy superhero, blue suit, red cape (twin of Veera)",
+              "suit": (60, 120, 230), "cape": (230, 60, 60), "mask": True, "hair": "spiky", "trim": (255, 210, 60)},
+    "veera": {"kind": "kid", "name": "Veera", "desc": "6-year-old girl superhero, pink suit, yellow cape (twin of Veer)",
+              "suit": (235, 90, 160), "cape": (255, 200, 40), "mask": True, "hair": "ponytails", "trim": (120, 220, 255)},
+    "aarav": {"kind": "kid", "name": "Aarav", "desc": "curious 7-year-old boy in a green kurta",
+              "suit": (70, 170, 100), "cape": None, "mask": False, "hair": "short", "trim": (250, 230, 150)},
+    "meera": {"kind": "kid", "name": "Meera", "desc": "cheerful 6-year-old girl in a purple frock, hair in a bun",
+              "suit": (150, 100, 220), "cape": None, "mask": False, "hair": "bun", "trim": (255, 180, 200)},
+    "anya":  {"kind": "kid", "name": "Anya", "desc": "shy 5-year-old girl in an orange dress with short hair",
+              "suit": (250, 140, 60), "cape": None, "mask": False, "hair": "bob", "trim": (255, 240, 120)},
+    # animal friends
+    "gappu": {"kind": "elephant", "name": "Gappu", "desc": "a playful baby elephant", "fur": (155, 165, 185)},
+    "chiku": {"kind": "bunny", "name": "Chiku", "desc": "a quick little white bunny", "fur": (246, 244, 240)},
+    "bandu": {"kind": "monkey", "name": "Bandu", "desc": "a cheeky little monkey", "fur": (150, 100, 60)},
+    "tara":  {"kind": "bear", "name": "Tara", "desc": "a gentle little honey-brown bear cub", "fur": (190, 130, 70)},
 }
+KIDS = CAST   # backwards compatible name
+SKIN = (205, 150, 110)
 CW, CH = 340, 560
 MOODS = ("happy", "smile", "sad", "surprised", "cross")
 ACTS = ("idle", "bounce", "walk", "jump", "wave", "point", "hero", "droop")
@@ -116,74 +172,156 @@ def star(d, cx, cy, r, col):
     d.polygon(pts, fill=col)
 
 
-@lru_cache(4000)
-def kid_sprite(who, mood, blink, arm_l, arm_r, leg, cape, flip):
-    k = KIDS[who]
-    def f(d, s):
-        X = lambda v: v * s
-        cx = CW / 2
+def face(d, X, cx, hy, mood, blink, sep=46, size=1.0, mouth_y=72, cheeks=(240, 120, 120)):
+    for side in (-1, 1):
+        ex, ey = cx + side * sep, hy + 6
+        r = 19 * size
+        if blink:
+            d.line([X(ex - 18*size), X(ey + 4), X(ex + 18*size), X(ey + 4)], fill=INK, width=X(6))
+        elif mood == "surprised":
+            d.ellipse([X(ex - r - 2), X(ey - r - 3), X(ex + r + 2), X(ey + r + 3)], fill=(255, 255, 255))
+            d.ellipse([X(ex - 10*size), X(ey - 10*size), X(ex + 10*size), X(ey + 10*size)], fill=INK)
+        else:
+            d.ellipse([X(ex - r), X(ey - r), X(ex + r), X(ey + r)], fill=(255, 255, 255))
+            d.ellipse([X(ex - 12*size + side * 2), X(ey - 10*size), X(ex + 10*size + side * 2), X(ey + 12*size)], fill=INK)
+            d.ellipse([X(ex - 4), X(ey - 7), X(ex + 3), X(ey)], fill=(255, 255, 255))
+        if mood == "cross":
+            d.line([X(ex - 24 * side), X(ey - 34), X(ex + 18 * side), X(ey - 24)], fill=INK, width=X(8))
+        if mood == "sad":
+            d.line([X(ex - 20 * side), X(ey - 24), X(ex + 18 * side), X(ey - 34)], fill=INK, width=X(7))
+    if cheeks:
+        for side in (-1, 1):
+            d.ellipse([X(cx + side * (sep + 32) - 18), X(hy + 48), X(cx + side * (sep + 32) + 18), X(hy + 70)], fill=cheeks)
+    my = hy + mouth_y
+    if mood == "happy":
+        d.chord([X(cx - 36), X(my - 26), X(cx + 36), X(my + 26)], 0, 180, fill=(150, 40, 60))
+        d.chord([X(cx - 22), X(my + 4), X(cx + 22), X(my + 26)], 200, 340, fill=(255, 130, 140))
+    elif mood == "sad":
+        d.arc([X(cx - 26), X(my), X(cx + 26), X(my + 32)], 200, 340, fill=INK, width=X(7))
+    elif mood == "surprised":
+        d.ellipse([X(cx - 15), X(my - 6), X(cx + 15), X(my + 28)], fill=(150, 40, 60))
+    elif mood == "cross":
+        d.line([X(cx - 22), X(my + 10), X(cx + 22), X(my + 6)], fill=INK, width=X(7))
+    else:
+        d.arc([X(cx - 28), X(my - 18), X(cx + 28), X(my + 16)], 20, 160, fill=INK, width=X(7))
+
+
+def _kid(d, X, k, mood, blink, arm_l, arm_r, leg, cape):
+    cx = CW / 2; hair = (40, 30, 35)
+    if k["cape"]:
         fl = cape * 22
         d.polygon([(X(cx - 62), X(300)), (X(cx + 62), X(300)), (X(cx + 95 + fl), X(470)), (X(cx - 95 + fl * 0.6), X(470))], fill=k["cape"])
-        for side, ph in ((-1, leg), (1, -leg)):
-            hip = (X(cx + side * 30), X(440)); foot = (X(cx + side * 34 + ph * 28), X(530))
-            limb(d, hip, foot, X(38), k["suit"])
-            d.ellipse([foot[0] - X(30), foot[1] - X(8), foot[0] + X(30), foot[1] + X(22)], fill=k["cape"])
+    legcol = k["suit"] if k["mask"] else (60, 70, 110)
+    for side, ph in ((-1, leg), (1, -leg)):
+        hip = (X(cx + side * 30), X(440)); foot = (X(cx + side * 34 + ph * 28), X(530))
+        limb(d, hip, foot, X(38), legcol if k["mask"] else SKIN)
+        if not k["mask"]:
+            d.rounded_rectangle([X(cx + side * 30 - 26), X(430), X(cx + side * 30 + 26), X(480)], X(10), fill=legcol)
+        d.ellipse([foot[0] - X(30), foot[1] - X(8), foot[0] + X(30), foot[1] + X(22)], fill=k["cape"] or (120, 80, 60))
+    if k["hair"] in ("bun", "bob") and not k["mask"]:   # dress shape
+        d.polygon([(X(cx - 60), X(300)), (X(cx + 60), X(300)), (X(cx + 95), X(470)), (X(cx - 95), X(470))], fill=k["suit"])
+        d.rounded_rectangle([X(cx - 62), X(290), X(cx + 62), X(370)], X(30), fill=k["suit"])
+        d.line([X(cx - 90), X(462), X(cx + 90), X(462)], fill=k["trim"], width=X(10))
+    else:
         d.rounded_rectangle([X(cx - 70), X(290), X(cx + 70), X(455)], X(42), fill=k["suit"])
-        d.rectangle([X(cx - 70), X(415), X(cx + 70), X(432)], fill=k["belt"])
-        star(d, X(cx), X(352), X(30), k["belt"])
-        for side, ang in ((-1, arm_l), (1, arm_r)):
-            sh = (X(cx + side * 66), X(312)); a = math.radians(ang)
-            hand = (sh[0] + side * math.sin(a) * X(105), sh[1] + math.cos(a) * X(105))
-            limb(d, sh, hand, X(32), k["suit"])
-            d.ellipse([hand[0] - X(22), hand[1] - X(22), hand[0] + X(22), hand[1] + X(22)], fill=k["skin"])
-        hy = 170; r = 118
-        if who == "veera":
-            for side in (-1, 1):
-                px = cx + side * 122
-                d.ellipse([X(px - 42), X(hy - 20), X(px + 42), X(hy + 95)], fill=k["hair"])
-                d.ellipse([X(px - 26), X(hy - 52), X(px + 26), X(hy - 10)], fill=k["cape"])
-        d.ellipse([X(cx - r), X(hy - r), X(cx + r), X(hy + r)], fill=k["skin"])
-        d.ellipse([X(cx - r - 14), X(hy - 8), X(cx - r + 18), X(hy + 34)], fill=k["skin"])
-        d.ellipse([X(cx + r - 18), X(hy - 8), X(cx + r + 14), X(hy + 34)], fill=k["skin"])
-        if who == "veer":
-            d.chord([X(cx - r - 4), X(hy - r - 10), X(cx + r + 4), X(hy + r - 40)], 180, 360, fill=k["hair"])
-            for i in range(5):
-                x0 = cx - 95 + i * 42
-                d.polygon([(X(x0), X(hy - 60)), (X(x0 + 44), X(hy - 60)), (X(x0 + 26), X(hy - 18))], fill=k["hair"])
-            d.polygon([(X(cx - 20), X(hy - r - 6)), (X(cx + 10), X(hy - r - 40)), (X(cx + 30), X(hy - r + 2))], fill=k["hair"])
+        if k["mask"]:
+            d.rectangle([X(cx - 70), X(415), X(cx + 70), X(432)], fill=k["trim"]); star(d, X(cx), X(352), X(30), k["trim"])
         else:
-            d.chord([X(cx - r - 6), X(hy - r - 12), X(cx + r + 6), X(hy + r - 30)], 180, 360, fill=k["hair"])
-            d.pieslice([X(cx - r - 6), X(hy - r - 12), X(cx + 30), X(hy + 10)], 180, 270, fill=k["hair"])
+            for yy in (320, 350, 380): d.ellipse([X(cx - 6), X(yy - 6), X(cx + 6), X(yy + 6)], fill=k["trim"])
+    for side, ang in ((-1, arm_l), (1, arm_r)):
+        sh = (X(cx + side * 66), X(312)); a = math.radians(ang)
+        hand = (sh[0] + side * math.sin(a) * X(105), sh[1] + math.cos(a) * X(105))
+        limb(d, sh, hand, X(32), k["suit"] if k["mask"] else SKIN)
+        if not k["mask"]: limb(d, sh, ((sh[0] * 2 + hand[0]) / 3, (sh[1] * 2 + hand[1]) / 3), X(36), k["suit"])
+        d.ellipse([hand[0] - X(22), hand[1] - X(22), hand[0] + X(22), hand[1] + X(22)], fill=SKIN)
+    hy = 170; r = 118
+    if k["hair"] == "ponytails":
+        for side in (-1, 1):
+            px = cx + side * 122
+            d.ellipse([X(px - 42), X(hy - 20), X(px + 42), X(hy + 95)], fill=hair)
+            d.ellipse([X(px - 26), X(hy - 52), X(px + 26), X(hy - 10)], fill=k["cape"])
+    if k["hair"] == "bun":
+        d.ellipse([X(cx - 48), X(hy - r - 62), X(cx + 48), X(hy - r + 26)], fill=hair)
+        d.ellipse([X(cx - 20), X(hy - r - 6), X(cx + 20), X(hy - r + 18)], fill=k["trim"])
+    if k["hair"] == "bob":
+        d.rounded_rectangle([X(cx - r - 14), X(hy - r), X(cx + r + 14), X(hy + 70)], X(60), fill=hair)
+    d.ellipse([X(cx - r), X(hy - r), X(cx + r), X(hy + r)], fill=SKIN)
+    d.ellipse([X(cx - r - 14), X(hy - 8), X(cx - r + 18), X(hy + 34)], fill=SKIN)
+    d.ellipse([X(cx + r - 18), X(hy - 8), X(cx + r + 14), X(hy + 34)], fill=SKIN)
+    if k["hair"] == "spiky":
+        d.chord([X(cx - r - 4), X(hy - r - 10), X(cx + r + 4), X(hy + r - 40)], 180, 360, fill=hair)
+        for i in range(5):
+            x0 = cx - 95 + i * 42
+            d.polygon([(X(x0), X(hy - 60)), (X(x0 + 44), X(hy - 60)), (X(x0 + 26), X(hy - 18))], fill=hair)
+        d.polygon([(X(cx - 20), X(hy - r - 6)), (X(cx + 10), X(hy - r - 40)), (X(cx + 30), X(hy - r + 2))], fill=hair)
+    elif k["hair"] == "short":
+        d.chord([X(cx - r - 4), X(hy - r - 8), X(cx + r + 4), X(hy + r - 50)], 180, 360, fill=hair)
+        d.pieslice([X(cx - r - 4), X(hy - r - 8), X(cx + 60), X(hy - 10)], 180, 280, fill=hair)
+    else:
+        d.chord([X(cx - r - 6), X(hy - r - 12), X(cx + r + 6), X(hy + r - 30)], 180, 360, fill=hair)
+        d.pieslice([X(cx - r - 6), X(hy - r - 12), X(cx + 30), X(hy + 10)], 180, 270, fill=hair)
+    if k["mask"]:
         d.rounded_rectangle([X(cx - 96), X(hy - 16), X(cx + 96), X(hy + 30)], X(22), fill=k["suit"])
+    face(d, X, cx, hy, mood, blink)
+
+
+def _animal(d, X, k, mood, blink, arm_l, arm_r, leg):
+    cx = CW / 2; fur = k["fur"]; kind = k["kind"]
+    dark = tuple(max(0, c - 40) for c in fur); light = tuple(min(255, c + 45) for c in fur)
+    if kind == "monkey":
+        d.arc([X(cx + 20), X(330), X(cx + 160), X(480)], 200, 100, fill=dark, width=X(18))
+    if kind == "bunny":
+        d.ellipse([X(cx + 50), X(400), X(cx + 100), X(450)], fill=(255, 255, 255))
+    for side, ph in ((-1, leg), (1, -leg)):
+        hip = (X(cx + side * 40), X(450)); foot = (X(cx + side * 44 + ph * 26), X(528))
+        limb(d, hip, foot, X(52 if kind in ("elephant", "bear") else 40), fur)
+        d.ellipse([foot[0] - X(32), foot[1] - X(8), foot[0] + X(32), foot[1] + X(22)], fill=dark)
+    d.ellipse([X(cx - 95), X(300), X(cx + 95), X(490)], fill=fur)
+    d.ellipse([X(cx - 55), X(340), X(cx + 55), X(470)], fill=light if kind != "bunny" else (255, 235, 240))
+    for side, ang in ((-1, arm_l), (1, arm_r)):
+        sh = (X(cx + side * 80), X(345)); a = math.radians(ang)
+        hand = (sh[0] + side * math.sin(a) * X(95), sh[1] + math.cos(a) * X(95))
+        limb(d, sh, hand, X(36), fur)
+        d.ellipse([hand[0] - X(22), hand[1] - X(22), hand[0] + X(22), hand[1] + X(22)], fill=dark if kind != "bunny" else fur)
+    hy = 190; r = 110
+    if kind == "elephant":
         for side in (-1, 1):
-            ex, ey = cx + side * 46, hy + 6
-            if blink:
-                d.line([X(ex - 18), X(ey + 4), X(ex + 18), X(ey + 4)], fill=INK, width=X(6))
-            elif mood == "surprised":
-                d.ellipse([X(ex - 21), X(ey - 22), X(ex + 21), X(ey + 22)], fill=(255, 255, 255))
-                d.ellipse([X(ex - 10), X(ey - 10), X(ex + 10), X(ey + 10)], fill=INK)
-            else:
-                d.ellipse([X(ex - 19), X(ey - 19), X(ex + 19), X(ey + 19)], fill=(255, 255, 255))
-                d.ellipse([X(ex - 12 + side * 2), X(ey - 10), X(ex + 10 + side * 2), X(ey + 12)], fill=INK)
-                d.ellipse([X(ex - 4), X(ey - 7), X(ex + 3), X(ey)], fill=(255, 255, 255))
-            if mood == "cross":
-                d.line([X(ex - 24 * side), X(ey - 34), X(ex + 18 * side), X(ey - 24)], fill=INK, width=X(8))
-            if mood == "sad":
-                d.line([X(ex - 20 * side), X(ey - 24), X(ex + 18 * side), X(ey - 34)], fill=INK, width=X(7))
+            d.ellipse([X(cx + side * 120 - 80), X(hy - 90), X(cx + side * 120 + 80), X(hy + 90)], fill=fur)
+            d.ellipse([X(cx + side * 120 - 52), X(hy - 60), X(cx + side * 120 + 52), X(hy + 62)], fill=(240, 180, 190))
+    if kind == "bunny":
         for side in (-1, 1):
-            d.ellipse([X(cx + side * 78 - 18), X(hy + 48), X(cx + side * 78 + 18), X(hy + 70)], fill=(240, 120, 120))
-        my = hy + 72
-        if mood == "happy":
-            d.chord([X(cx - 36), X(my - 26), X(cx + 36), X(my + 26)], 0, 180, fill=(150, 40, 60))
-            d.chord([X(cx - 22), X(my + 4), X(cx + 22), X(my + 26)], 200, 340, fill=(255, 130, 140))
-        elif mood == "sad":
-            d.arc([X(cx - 26), X(my), X(cx + 26), X(my + 32)], 200, 340, fill=INK, width=X(7))
-        elif mood == "surprised":
-            d.ellipse([X(cx - 15), X(my - 6), X(cx + 15), X(my + 28)], fill=(150, 40, 60))
-        elif mood == "cross":
-            d.line([X(cx - 22), X(my + 10), X(cx + 22), X(my + 6)], fill=INK, width=X(7))
-        else:
-            d.arc([X(cx - 28), X(my - 18), X(cx + 28), X(my + 16)], 20, 160, fill=INK, width=X(7))
+            d.ellipse([X(cx + side * 50 - 30), X(hy - 250), X(cx + side * 50 + 30), X(hy - 60)], fill=fur)
+            d.ellipse([X(cx + side * 50 - 15), X(hy - 225), X(cx + side * 50 + 15), X(hy - 80)], fill=(255, 190, 200))
+    if kind in ("monkey", "bear"):
+        for side in (-1, 1):
+            d.ellipse([X(cx + side * 100 - 42), X(hy - 110), X(cx + side * 100 + 42), X(hy - 26)], fill=fur)
+            d.ellipse([X(cx + side * 100 - 22), X(hy - 90), X(cx + side * 100 + 22), X(hy - 46)], fill=light)
+    d.ellipse([X(cx - r), X(hy - r), X(cx + r), X(hy + r)], fill=fur)
+    if kind == "monkey":
+        d.ellipse([X(cx - 82), X(hy - 50), X(cx + 82), X(hy + 100)], fill=(240, 200, 160))
+    if kind == "bear":
+        d.ellipse([X(cx - 50), X(hy + 30), X(cx + 50), X(hy + 100)], fill=light)
+    face(d, X, cx, hy - 10, mood, blink, sep=40, size=0.9, mouth_y=80, cheeks=(250, 150, 160))
+    if kind == "elephant":   # trunk over the mouth, curling up when happy
+        up = mood in ("happy", "surprised")
+        trunk = tuple(max(0, c - 18) for c in fur)
+        pts = [X(cx), X(hy + 30), X(cx + 4), X(hy + 100), X(cx + (46 if up else 12)), X(hy + (112 if up else 165))]
+        d.line(pts, fill=dark, width=X(40), joint="curve")
+        d.line(pts, fill=trunk, width=X(30), joint="curve")
+        for yy in (60, 80): d.arc([X(cx - 12), X(hy + yy - 6), X(cx + 16), X(hy + yy + 6)], 0, 180, fill=dark, width=X(3))
+    if kind == "bunny":
+        d.polygon([(X(cx - 10), X(hy + 48)), (X(cx + 10), X(hy + 48)), (X(cx), X(hy + 60))], fill=(240, 120, 140))
+    if kind == "bear":
+        d.ellipse([X(cx - 14), X(hy + 40), X(cx + 14), X(hy + 58)], fill=INK)
+
+
+@lru_cache(6000)
+def kid_sprite(who, mood, blink, arm_l, arm_r, leg, cape, flip):
+    k = CAST[who]
+    def f(d, s):
+        X = lambda v: v * s
+        if k["kind"] == "kid": _kid(d, X, k, mood, blink, arm_l, arm_r, leg, cape)
+        else: _animal(d, X, k, mood, blink, arm_l, arm_r, leg)
     img = aa(f, (CW, CH))
     return img.transpose(Image.FLIP_LEFT_RIGHT) if flip else img
 
@@ -191,7 +329,7 @@ def kid_sprite(who, mood, blink, arm_l, arm_r, leg, cape, flip):
 def kid_frame(c, t, dur):
     act = c.get("act", "idle"); who = c["who"]
     ph = t * 2 * math.pi
-    seed = 0.0 if who == "veer" else 1.3
+    seed = (sum(map(ord, who)) % 17) / 6.0
     blink = (t + seed) % 3.1 < 0.12
     x = c.get("x", 540); y_off = 0; leg = 0; arm_l = arm_r = 18; cape = math.sin(ph * 1.2 + seed) * 0.5
     mood = c.get("mood", "smile")
@@ -214,9 +352,9 @@ def kid_frame(c, t, dur):
         arm_l = arm_r = 40; cape = 1 + 0.3 * math.sin(ph * 2); y_off = -4
     elif act == "droop":
         arm_l = arm_r = 6; y_off = 6
-    face = c.get("face") or ("right" if x < 540 else "left")
+    face_dir = c.get("face") or ("right" if x < 540 else "left")
     q = lambda v, n: round(v / n) * n
-    spr = kid_sprite(who, mood, blink, q(arm_l, 6), q(arm_r, 6), round(leg, 1), round(cape, 1), face == "left")
+    spr = kid_sprite(who, mood, blink, q(arm_l, 6), q(arm_r, 6), round(leg, 1), round(cape, 1), face_dir == "left")
     return spr, x, GROUND + y_off
 
 
@@ -392,14 +530,16 @@ def s_title(s, spec, t):
     img = bg_base(s.get("bg", "park")).copy(); clouds(img, t, s.get("bg", "park"))
     d = ImageDraw.Draw(img)
     k = ease(t / 0.6)
-    f1 = font(130); line = "TWIN HEROES"
+    f1 = font(130); line = BRAND
     outlined(d, ((W - d.textlength(line, font=f1)) / 2, lerp(-150, 300, k)), line, f1, (255, 210, 50), sw=10)
     f2 = font(84); y = 470
     for ln in wrap(d, spec["title"], f2, 960):
         outlined(d, ((W - d.textlength(ln, font=f2)) / 2, y), ln, f2, (255, 255, 255), sw=8); y += 104
     top_pill(img, f"STORY #{spec['story_no']}")
-    for who, x in (("veer", 360), ("veera", 720)):
-        c = {"who": who, "x": x, "mood": "happy", "act": "wave" if who == "veera" else "hero"}
+    cast = (spec.get("cast") or ["veer", "veera"])[:2]
+    xs = (540,) if len(cast) == 1 else (360, 720)
+    for i, (who, x) in enumerate(zip(cast, xs)):
+        c = {"who": who, "x": x, "mood": "happy", "act": "wave" if i == 1 else "hero"}
         spr, cx, cy = kid_frame(c, t, s["dur"])
         img.alpha_composite(spr, (int(cx - CW / 2), int(cy - CH + lerp(500, 0, ease(t / 0.8)))))
     sparkles(img, t)
@@ -438,7 +578,8 @@ def s_moral(s, spec, t):
     y = 360
     for ln in wrap(d, s["text"], f1, 920):
         outlined(d, ((W - d.textlength(ln, font=f1)) / 2, y), ln, f1, (255, 255, 255), sw=7); y += int(f1.size * 1.25)
-    for who, x in (("veer", 330), ("veera", 750)):
+    cast = (spec.get("cast") or ["veer", "veera"])[:2]
+    for who, x in zip(cast, (330, 750) if len(cast) > 1 else (540,)):
         spr, cx, cy = kid_frame({"who": who, "x": x, "mood": "happy", "act": "jump"}, t, s["dur"])
         img.alpha_composite(spr, (int(cx - CW / 2), int(cy - CH - 100)))
     sparkles(img, t, seed=9)

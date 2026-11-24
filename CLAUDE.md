@@ -1,8 +1,10 @@
-# Twin Heroes AI story factory (@twin.heros)
+# Kahani Time story factory (@kahani.time.kids, formerly @twin.heros)
 
-Faceless kids' story page: one short 3D-style moral story per day starring original twin heroes
-**Veer** (boy, blue suit, red cape) and **Veera** (girl, pink suit, yellow cape). Owner: Shubhangi.
-Audience: parents of 3-8 year olds in India. Simple English, Indian setting.
+Faceless kids' story page: one short animated moral story per day. Owner: Shubhangi.
+Owner does NOT want every story about the twins: each story picks 1-3 characters from a varied cast in
+`cartoon_engine.CAST` (kids Aarav, Meera, Anya; hero twins Veer & Veera; animals Gappu elephant, Chiku bunny,
+Bandu monkey, Tara bear cub), avoiding the cast of recent stories. Backgrounds: home, park, night, village, school, jungle.
+Audience: parents of 3-8 year olds in India. Simple English, Indian setting. Caption hashtag ends with #kahanitimekids.
 
 ## Pipeline (fully automatic, runs on GitHub Actions)
 1. `make-story.yml` (9 AM IST daily) runs `pipeline/make_story_reel.py`:

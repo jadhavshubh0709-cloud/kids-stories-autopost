@@ -7,7 +7,7 @@ MOCK_STORY = {
     "moral_line": "Sharing makes happiness bigger!",
     "question": "Who does your child share snacks with?",
     "music": "playful",
-    "caption": "Only ONE laddoo... who gets it? 🍬\n\nWhat would your little one do? 👇\n\nA new Twin Heroes story every day ✨ Follow @twin.heros\n\n#kidsstories #moralstories #storytime #storiesforkids #bedtimestories #kidslearning #parentingindia #twinheros",
+    "caption": "Only ONE laddoo... who gets it? 🍬\n\nWhat would your little one do? 👇\n\nA new story every day ✨ Follow @kahani.time.kids\n\n#kidsstories #moralstories #storytime #storiesforkids #bedtimestories #kidslearning #parentingindia #kahanitimekids",
     "scenes": [
         {"visual": "A cozy Indian living room in the evening. Veer and Veera run in and stop in surprise at a small table with one round orange laddoo on a steel plate. Slow push-in on their amazed faces.",
          "sound": "soft evening sounds", "narration": "One evening, Veer and Veera found just one laddoo on the table."},
@@ -24,17 +24,24 @@ MOCK_STORY = {
 
 
 STAGING = [
-    {"bg": "home", "veer": {"place": "left", "action": "walk", "walk_to": "centre_left", "mood": "surprised"},
-     "veera": {"place": "right", "action": "idle", "mood": "surprised"}, "props": [{"kind": "plate", "state": "one", "place": "table"}]},
-    {"bg": "home", "veer": {"place": "left", "action": "point", "mood": "cross"}, "veera": {"place": "right", "action": "point", "mood": "cross"},
-     "props": [{"kind": "plate", "state": "one", "place": "table"}], "say": [{"who": "veer", "text": "It's mine!"}, {"who": "veera", "text": "No, mine!"}]},
-    {"bg": "home", "veer": {"place": "left", "action": "idle", "mood": "surprised"}, "veera": {"place": "right", "action": "droop", "mood": "sad"},
-     "props": [{"kind": "plate", "state": "one", "place": "table"}, {"kind": "bird", "place": "window", "motion": "arrive"}], "say": [{"who": "prop", "text": "Chirp..."}]},
-    {"bg": "home", "veer": {"place": "left", "action": "idle", "mood": "smile"}, "veera": {"place": "right", "action": "wave", "mood": "happy"},
-     "props": [{"kind": "plate", "state": "three", "place": "table"}, {"kind": "bird", "place": "window", "motion": "hop"}], "say": [{"who": "veera", "text": "Let's share!"}]},
-    {"bg": "park", "veer": {"place": "left", "action": "jump", "mood": "happy"}, "veera": {"place": "right", "action": "jump", "mood": "happy"},
-     "props": [{"kind": "bird", "place": "sky", "motion": "bob"}, {"kind": "heart", "place": "sky", "motion": "float"}], "sparkle": True},
+    {"bg": "village", "chars": [{"who": "meera", "place": "left", "action": "walk", "walk_to": "centre_left", "mood": "happy"},
+                               {"who": "gappu", "place": "right", "action": "idle", "mood": "surprised"}],
+     "props": [{"kind": "mango", "place": "ground_centre"}]},
+    {"bg": "school", "chars": [{"who": "aarav", "place": "left", "action": "point", "mood": "cross"},
+                              {"who": "anya", "place": "right", "action": "droop", "mood": "sad"}],
+     "props": [{"kind": "plate", "state": "one", "place": "table"}], "say": [{"who": "aarav", "text": "It's mine!"}]},
+    {"bg": "jungle", "chars": [{"who": "bandu", "place": "left", "action": "bounce", "mood": "happy"},
+                              {"who": "chiku", "place": "centre", "action": "jump", "mood": "happy"},
+                              {"who": "tara", "place": "right", "action": "wave", "mood": "smile"}],
+     "props": [{"kind": "bird", "place": "sky", "motion": "bob"}], "say": [{"who": "prop", "text": "Chirp..."}]},
+    {"bg": "home", "chars": [{"who": "veer", "place": "left", "action": "hero", "mood": "smile"},
+                            {"who": "veera", "place": "right", "action": "wave", "mood": "happy"}],
+     "props": [{"kind": "plate", "state": "three", "place": "table"}], "say": [{"who": "veera", "text": "Let's share!"}]},
+    {"bg": "park", "chars": [{"who": "meera", "place": "left", "action": "jump", "mood": "happy"},
+                            {"who": "gappu", "place": "right", "action": "jump", "mood": "happy"}],
+     "props": [{"kind": "heart", "place": "sky", "motion": "float"}], "sparkle": True},
 ]
+MOCK_STORY["cast"] = ["meera", "gappu"]
 for _sc, _st in zip(MOCK_STORY["scenes"], STAGING): _sc.update(_st)
 
 

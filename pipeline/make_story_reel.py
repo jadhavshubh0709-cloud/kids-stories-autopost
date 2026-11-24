@@ -43,11 +43,13 @@ def make_clip_with_retry(prompt, refs, out, resolution):
 
 def make_cartoon(date, moral, history, n, work, out_dir):
     """FREE default: AI story + AI staging -> animated cartoon (characters really move) + free AI narrator."""
-    story = cartoon_writer.write(moral, [h["title"] for h in history], n)
+    recent_cast = [c for h in history[-4:] for c in h.get("cast", [])]
+    story = cartoon_writer.write(moral, [h["title"] for h in history], n, recent_cast)
     story_no = (history[-1]["story_no"] + 1) if history else 1
     story.update(story_no=story_no, moral=moral)
     if story.get("music") not in ("playful", "gentle", "adventure"): story["music"] = "playful"
-    if "#twinheros" not in story["caption"]: story["caption"] = story["caption"].rstrip() + " #twinheros"
+    story["caption"] = story["caption"].replace("#twinheros", "#kahanitimekids").replace("@twin.heros", "@kahani.time.kids")
+    if "#kahanitimekids" not in story["caption"]: story["caption"] = story["caption"].rstrip() + " #kahanitimekids"
     print(f"  Story #{story_no}: {story['title']}", flush=True)
     # ONE voice request for the whole story (free tier allows only ~10 voice requests a day).
     lines = [sc["narration"].strip() for sc in story["scenes"]] + [f"Remember, {story['moral_line']}"]
@@ -69,7 +71,7 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     total = assemble.mix_voices(silent, tracks, os.path.join(ROOT, "music", story["music"] + ".m4a"), os.path.join(out_dir, "reel.mp4"))
     open(os.path.join(out_dir, "caption.txt"), "w").write(story["caption"].strip() + "\n")
-    history.append({"date": date, "story_no": story_no, "title": story["title"], "moral": moral})
+    history.append({"date": date, "story_no": story_no, "title": story["title"], "moral": moral, "cast": spec.get("cast", [])})
     json.dump(history, open(HISTORY, "w"), indent=2, ensure_ascii=False)
     shutil.rmtree(work, ignore_errors=True)
     print(f"  done: reels/{date}/reel.mp4 ({total:.1f}s, cartoon)", flush=True)

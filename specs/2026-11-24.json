@@ -1,0 +1,374 @@
+{
+  "story": {
+    "title": "The Sweet Laddoo Share",
+    "moral_line": "Sharing food brings double happiness.",
+    "question": "How do your little ones share their favorite treats at home?",
+    "music": "playful",
+    "caption": "Veer has sweet laddoos! Will he share with Veera? 😋 Sweets taste better together!\n\nHow do your little ones share their favorite treats at home?\n\nA new Twin Heroes story every day ✨ Follow @twin.heros\n\n#parenting #indiamoms #toddlerlife #moralstories #kidsanimation #raisingkids #sharingiscaring #twinheros",
+    "scenes": [
+      {
+        "bg": "home",
+        "narration": "Maa made three yummy laddoos for tea time. Veer wants to eat all of them!",
+        "veer": {
+          "place": "left",
+          "action": "hero",
+          "mood": "happy"
+        },
+        "veera": {
+          "place": "right",
+          "action": "idle",
+          "mood": "smile"
+        },
+        "props": [
+          {
+            "kind": "plate",
+            "state": "three",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "veer",
+            "text": "Yummy laddoos for me!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Veer gets ready to eat. But he sees Veera looking sad with no snack.",
+        "veer": {
+          "place": "left",
+          "action": "bounce",
+          "mood": "surprised"
+        },
+        "veera": {
+          "place": "right",
+          "action": "droop",
+          "mood": "sad"
+        },
+        "props": [
+          {
+            "kind": "plate",
+            "state": "three",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "veera",
+            "text": "Can I have one?"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Veer smiles and pushes the plate forward to share with his sister.",
+        "veer": {
+          "place": "left",
+          "action": "walk",
+          "mood": "smile",
+          "walk_to": "centre_left"
+        },
+        "veera": {
+          "place": "right",
+          "action": "point",
+          "mood": "happy"
+        },
+        "props": [
+          {
+            "kind": "plate",
+            "state": "two",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "veer",
+            "text": "Take two, Veera!"
+          },
+          {
+            "who": "veera",
+            "text": "Thank you, Veer!"
+          }
+        ],
+        "sparkle": true
+      },
+      {
+        "bg": "park",
+        "narration": "They happily eat their laddoos together in the sunny park.",
+        "veer": {
+          "place": "centre_left",
+          "action": "jump",
+          "mood": "happy"
+        },
+        "veera": {
+          "place": "centre_right",
+          "action": "bounce",
+          "mood": "happy"
+        },
+        "props": [
+          {
+            "kind": "heart",
+            "place": "sky",
+            "motion": "float"
+          }
+        ],
+        "say": [
+          {
+            "who": "veer",
+            "text": "Sharing is so fun!"
+          }
+        ],
+        "sparkle": true
+      },
+      {
+        "bg": "park",
+        "narration": "The twin heroes know that sharing treats makes everyone extra happy!",
+        "veer": {
+          "place": "left",
+          "action": "wave",
+          "mood": "happy"
+        },
+        "veera": {
+          "place": "right",
+          "action": "hero",
+          "mood": "happy"
+        },
+        "props": [
+          {
+            "kind": "heart",
+            "place": "sky",
+            "motion": "bob"
+          }
+        ],
+        "say": [
+          {
+            "who": "veera",
+            "text": "We love sharing!"
+          }
+        ],
+        "sparkle": true
+      }
+    ],
+    "story_no": 1,
+    "moral": "sharing"
+  },
+  "cartoon": {
+    "title": "The Sweet Laddoo Share",
+    "story_no": 1,
+    "scenes": [
+      {
+        "type": "title",
+        "bg": "park",
+        "dur": 3.0
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 8.72,
+        "text": "Maa made three yummy laddoos for tea time. Veer wants to eat all of them!",
+        "chars": [
+          {
+            "who": "veer",
+            "x": 260,
+            "act": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "veera",
+            "x": 820,
+            "act": "idle",
+            "mood": "smile"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1160,
+            "layer": "back",
+            "state": "three"
+          }
+        ],
+        "say": [
+          {
+            "text": "Yummy laddoos for me!",
+            "at": 0.3,
+            "who": "veer"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 3.62,
+        "text": "Veer gets ready to eat. But he sees Veera looking sad with no snack.",
+        "chars": [
+          {
+            "who": "veer",
+            "x": 260,
+            "act": "bounce",
+            "mood": "surprised"
+          },
+          {
+            "who": "veera",
+            "x": 820,
+            "act": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1160,
+            "layer": "back",
+            "state": "three"
+          }
+        ],
+        "say": [
+          {
+            "text": "Can I have one?",
+            "at": 0.3,
+            "who": "veera"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 5.81,
+        "text": "Veer smiles and pushes the plate forward to share with his sister.",
+        "chars": [
+          {
+            "who": "veer",
+            "x": 540,
+            "act": "walk",
+            "mood": "smile",
+            "from_x": 260,
+            "to_x": 540,
+            "face": "right"
+          },
+          {
+            "who": "veera",
+            "x": 820,
+            "act": "point",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "plate",
+            "x": 540,
+            "y": 1160,
+            "layer": "back",
+            "state": "two"
+          }
+        ],
+        "say": [
+          {
+            "text": "Take two, Veera!",
+            "at": 0.3,
+            "who": "veer"
+          },
+          {
+            "text": "Thank you, Veer!",
+            "at": 1.7,
+            "who": "veera"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 6.27,
+        "text": "They happily eat their laddoos together in the sunny park.",
+        "chars": [
+          {
+            "who": "veer",
+            "x": 390,
+            "act": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "veera",
+            "x": 690,
+            "act": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 640,
+            "layer": "back",
+            "anim": "float"
+          }
+        ],
+        "say": [
+          {
+            "text": "Sharing is so fun!",
+            "at": 0.3,
+            "who": "veer"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 12.14,
+        "text": "The twin heroes know that sharing treats makes everyone extra happy!",
+        "chars": [
+          {
+            "who": "veer",
+            "x": 260,
+            "act": "wave",
+            "mood": "happy"
+          },
+          {
+            "who": "veera",
+            "x": 820,
+            "act": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 640,
+            "layer": "back",
+            "anim": "bob"
+          }
+        ],
+        "say": [
+          {
+            "text": "We love sharing!",
+            "at": 0.3,
+            "who": "veera"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "moral",
+        "bg": "park",
+        "dur": 5.45,
+        "text": "Sharing food brings double happiness.",
+        "question": "How do your little ones share their favorite treats at home?"
+      }
+    ]
+  }
+}

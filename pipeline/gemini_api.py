@@ -170,10 +170,34 @@ def narrate(text, out_wav, style="Read this like a warm, gentle Indian storytell
     if MOCK:
         from mock_data import mock_voice
         return mock_voice(text, out_wav)
+    if os.environ.get("VOICE_ENGINE") == "edge":
+        return narrate_edge(text, out_wav)
+    try:
+        return _narrate_gemini(text, out_wav, style)
+    except ApiError as e:
+        print(f"  Gemini voice unavailable ({str(e)[:120]}...), using the free Edge voice instead", flush=True)
+        return narrate_edge(text, out_wav)
+
+
+def narrate_edge(text, out_wav):
+    """Free backup narrator (Microsoft Edge online voices via the edge-tts package; no key needed)."""
+    voice = os.environ.get("EDGE_VOICE", "en-IN-NeerjaNeural")
+    mp3 = out_wav + ".mp3"
+    text = text.replace("  ...  ", " ... ")
+    r = subprocess.run([sys.executable, "-m", "edge_tts", "--voice", voice, "--rate=-8%", "--text", text,
+                        "--write-media", mp3], capture_output=True, text=True)
+    if r.returncode != 0 or not os.path.exists(mp3):
+        raise ApiError("Edge voice failed: " + r.stderr[-400:])
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ar", "24000", "-ac", "1", out_wav], check=True)
+    os.remove(mp3)
+    return out_wav
+
+
+def _narrate_gemini(text, out_wav, style):
     body = {"contents": [{"parts": [{"text": f"{style}: {text}"}]}],
             "generationConfig": {"responseModalities": ["AUDIO"],
                                  "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICE}}}}}
-    resp = call("POST", f"models/{TTS_MODEL}:generateContent", body, timeout=180)
+    resp = call("POST", f"models/{TTS_MODEL}:generateContent", body, timeout=180, tries=2)
     for p in _parts(resp):
         d = p.get("inlineData") or p.get("inline_data")
         if d and d.get("data"):

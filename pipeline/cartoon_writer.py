@@ -101,9 +101,10 @@ def _place_chars(chars):
     return out
 
 
-def stage(story, durations, story_no):
+def stage(story, durations, story_no, ai_bgs=()):
     """Convert the model's menu choices into an engine spec. durations: seconds per story scene (from the voice)."""
-    scenes = [{"type": "title", "bg": "park", "dur": 3.0}]
+    first_bg = next((sc.get("bg") for sc in story["scenes"] if sc.get("bg") in BGS), "park")
+    scenes = [{"type": "title", "bg": first_bg, "dur": 3.0}]
     for i, (sc, dur) in enumerate(zip(story["scenes"], durations)):
         bg = sc.get("bg") if sc.get("bg") in BGS else "park"
         chars = _place_chars(sc.get("chars") or [])
@@ -113,6 +114,8 @@ def stage(story, durations, story_no):
             if kind not in PROPS: continue
             place = p.get("place", "ground_centre")
             if (place == "window" and bg != "home") or (place == "table" and bg not in ("home", "school")): place = "ground_centre"
+            if bg in ai_bgs and place in ("window", "table"):   # AI backgrounds have no fixed table/window
+                place = "sky" if place == "window" else "ground_centre"
             if kind == "kite": place = "sky"
             x, y = PROP_PLACES.get(place, PROP_PLACES["ground_centre"])
             if place == "ground_centre" and any(abs(c["x"] - 540) < 160 for c in chars): y = 1380
@@ -145,6 +148,22 @@ def stage(story, durations, story_no):
 
 
 def add_moral(spec, story, dur):
-    spec["scenes"].append({"type": "moral", "bg": "park", "dur": round(dur, 2), "text": story["moral_line"],
+    spec["scenes"].append({"type": "moral", "bg": spec["scenes"][-1].get("bg", "park"), "dur": round(dur, 2), "text": story["moral_line"],
                            "question": story["question"]})
     return spec
+
+
+BG_PROMPTS = {
+    "home": "cozy Indian home living room interior, warm afternoon light through a window, wooden floor, colourful cushions, potted plants",
+    "park": "sunny green park with big leafy trees, flowers, blue sky with fluffy clouds, soft grassy ground",
+    "night": "peaceful garden at night under a starry sky with a big glowing moon, soft blue light, grassy ground, fireflies",
+    "village": "colourful Indian village street with small huts with red tiled roofs, mango trees, a dirt road, warm morning sun",
+    "school": "bright cheerful primary school classroom with an empty green blackboard, small wooden desks, plants on the windowsill",
+    "jungle": "lush friendly jungle clearing with big trees, hanging vines, ferns and soft sunbeams, mossy ground",
+}
+
+
+def bg_prompt(kind):
+    return ("3D animated family movie background, cute stylized Pixar-like look, " + BG_PROMPTS.get(kind, BG_PROMPTS["park"]) +
+            ". Empty scene with no people and no animals, eye-level camera, wide open ground in the lower half, "
+            "soft cinematic lighting, highly detailed, no text, no letters, no signs, no watermark.")

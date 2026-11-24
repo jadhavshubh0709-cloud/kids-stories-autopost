@@ -6,7 +6,8 @@ Story scene: {"bg": "home|park|night", "text": narration, "chars": [...], "props
 """
 import math, os, random, subprocess
 from functools import lru_cache
-from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H, FPS = 1080, 1920, 30
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -122,6 +123,51 @@ def bg_base(kind):
             d.rectangle([655*s, 1200*s, 680*s, 1290*s], fill=(150, 95, 60))
         img.alpha_composite(aa(f, (W, H)))
     return img
+
+
+@lru_cache(16)
+def photo_bg(path):
+    """AI-made 3D background: fill 1080x1920, slight soft focus so the characters stand out (depth of field)."""
+    im = Image.open(path).convert("RGB")
+    sc = max(W / im.width, H / im.height)
+    im = im.resize((int(im.width * sc + 1), int(im.height * sc + 1)), Image.LANCZOS)
+    x0 = (im.width - W) // 2; y0 = (im.height - H) // 2
+    im = im.crop((x0, y0, x0 + W, y0 + H)).filter(ImageFilter.GaussianBlur(2.2))
+    # gentle darkening at the bottom so subtitles and feet read well
+    grad_ = Image.linear_gradient("L").resize((W, H)).point(lambda v: int(max(0, v - 150) * 0.5))
+    shade = Image.new("RGB", (W, H), (20, 10, 30))
+    return Image.composite(shade, im, grad_).convert("RGBA")
+
+
+def scene_bg(kind, spec):
+    p = (spec.get("bg_images") or {}).get(kind)
+    if p and os.path.exists(p):
+        return photo_bg(p).copy(), True
+    return bg_base(kind).copy(), False
+
+
+@lru_cache(8)
+def _shadow(wd):
+    sh = Image.new("RGBA", (wd + 60, 90), (0, 0, 0, 0))
+    ImageDraw.Draw(sh).ellipse([30, 25, wd + 30, 65], fill=(0, 0, 0, 120))
+    return sh.filter(ImageFilter.GaussianBlur(10))
+
+
+def ground_shadow(img, x, lift):
+    k = max(0.45, 1 - lift / 260)
+    sh = _shadow(int(200 * k))
+    img.alpha_composite(sh, (int(x - sh.width / 2), GROUND - 50))
+
+
+def camera(img, t, dur, push=0.05):
+    """Slow movie-style push-in towards the characters."""
+    z = 1 + push * ease(t / max(dur, 0.1))
+    if z <= 1.001: return img
+    w2, h2 = int(W / z), int(H / z)
+    cx, cy = W / 2, 1050
+    box = (int(cx - w2 / 2), int(min(max(cy - h2 * 0.55, 0), H - h2)), 0, 0)
+    box = (box[0], box[1], box[0] + w2, box[1] + h2)
+    return img.crop(box).resize((W, H), Image.BICUBIC)
 
 
 def clouds(img, t, kind):
@@ -315,6 +361,47 @@ def _animal(d, X, k, mood, blink, arm_l, arm_r, leg):
         d.ellipse([X(cx - 14), X(hy + 40), X(cx + 14), X(hy + 58)], fill=INK)
 
 
+def _blur(m, r):
+    return np.asarray(Image.fromarray((np.clip(m, 0, 1) * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(r)),
+                      dtype=np.float32) / 255.0
+
+
+def shade3d(img, strength=1.0, min_px=250):
+    """Soft 3D 'clay toy' look. Every flat-coloured part (head, body, arms, ears...) is lit like a rounded object:
+    bright towards the top-left, darker towards its bottom-right edge, with a small soft highlight."""
+    arr = np.asarray(img, dtype=np.uint8)
+    rgb = arr[..., :3].astype(np.float32); a = arr[..., 3].astype(np.float32) / 255.0
+    h, w = a.shape
+    solid = a > 0.98
+    key = (arr[..., 0].astype(np.int32) << 16) | (arr[..., 1].astype(np.int32) << 8) | arr[..., 2].astype(np.int32)
+    vals, counts = np.unique(key[solid], return_counts=True)
+    factor = np.ones((h, w), np.float32); spec = np.zeros((h, w), np.float32)
+    for v, c in zip(vals, counts):
+        if c < min_px: continue                                    # eyes, mouths, small details stay crisp
+        m = ((key == v) & solid).astype(np.float32)
+        ys, xs = np.nonzero(m); size = int(max(10, min(np.ptp(ys), np.ptp(xs)) + 1))
+        r = max(3, size // 5); d = max(2, size // 6)
+        up_left = np.zeros_like(m); up_left[:h - d, :w - d] = m[d:, d:]           # part moved up-left by d
+        lit = _blur(up_left * m, r)                                                # high top-left, low bottom-right
+        depth = _blur(m, r)                                                       # 1 inside, ~0.5 at the outline
+        f = 0.80 + 0.26 * lit + 0.08 * depth
+        factor = np.where(m > 0, f, factor)
+        d2 = max(3, size // 3); hl = np.zeros_like(m); hl[:h - d2, :w - d2] = m[d2:, d2:]
+        sp = np.clip(_blur(hl * m, r) - 0.82, 0, 1) * 2.2
+        spec = np.where(m > 0, sp, spec)
+    assigned = (factor != 1).astype(np.float32)
+    if assigned.any():   # give anti-aliased edge pixels the shading of the part next to them (no light seams)
+        num = np.asarray(Image.fromarray(((factor - 0.5) * assigned * 200).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2)), np.float32)
+        den = np.asarray(Image.fromarray((assigned * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(2)), np.float32)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            filled = np.where(den > 8, (num / 200) / np.maximum(den / 255, 1e-3) + 0.5, 1.0)
+        factor = np.where(assigned > 0, factor, filled)
+    factor = 1 + (factor - 1) * strength
+    out = np.clip(rgb * factor[..., None] + 255 * spec[..., None] * 0.35 * strength, 0, 255).astype(np.uint8)
+    res = Image.fromarray(np.dstack([out, arr[..., 3]]), "RGBA")
+    return res
+
+
 @lru_cache(6000)
 def kid_sprite(who, mood, blink, arm_l, arm_r, leg, cape, flip):
     k = CAST[who]
@@ -322,7 +409,7 @@ def kid_sprite(who, mood, blink, arm_l, arm_r, leg, cape, flip):
         X = lambda v: v * s
         if k["kind"] == "kid": _kid(d, X, k, mood, blink, arm_l, arm_r, leg, cape)
         else: _animal(d, X, k, mood, blink, arm_l, arm_r, leg)
-    img = aa(f, (CW, CH))
+    img = shade3d(aa(f, (CW, CH)))
     return img.transpose(Image.FLIP_LEFT_RIGHT) if flip else img
 
 
@@ -364,6 +451,10 @@ PROPS = ("plate", "bird", "ball", "puppy", "kitten", "tree_mango", "mango", "gif
 
 @lru_cache(64)
 def prop_sprite(kind, state=""):
+    return shade3d(_prop_sprite(kind, state), 0.8)
+
+
+def _prop_sprite(kind, state=""):
     if kind == "plate":
         n = {"one": 1, "three": 3, "two": 2, "empty": 0, "": 1}.get(state, 1)
         def f(d, s):
@@ -527,7 +618,8 @@ def sparkles(img, t, n=14, seed=1):
 
 # ---------------------------------------------------------------- scenes
 def s_title(s, spec, t):
-    img = bg_base(s.get("bg", "park")).copy(); clouds(img, t, s.get("bg", "park"))
+    img, ai = scene_bg(s.get("bg", "park"), spec)
+    if not ai: clouds(img, t, s.get("bg", "park"))
     d = ImageDraw.Draw(img)
     k = ease(t / 0.6)
     f1 = font(130); line = BRAND
@@ -541,19 +633,24 @@ def s_title(s, spec, t):
     for i, (who, x) in enumerate(zip(cast, xs)):
         c = {"who": who, "x": x, "mood": "happy", "act": "wave" if i == 1 else "hero"}
         spr, cx, cy = kid_frame(c, t, s["dur"])
-        img.alpha_composite(spr, (int(cx - CW / 2), int(cy - CH + lerp(500, 0, ease(t / 0.8)))))
+        dy = lerp(500, 0, ease(t / 0.8))
+        if dy < 5: ground_shadow(img, cx, GROUND - cy)
+        img.alpha_composite(spr, (int(cx - CW / 2), int(cy - CH + dy)))
     sparkles(img, t)
     return img
 
 
 def s_story(s, spec, t):
     bgk = s.get("bg", "park")
-    img = bg_base(bgk).copy(); clouds(img, t, bgk)
+    img, ai = scene_bg(bgk, spec)
+    if not ai: clouds(img, t, bgk)
     for p in s.get("props", []):
         if p.get("layer", "back") == "back": place_prop(img, p, t)
     pos = {}
-    for c in s.get("chars", []):
-        spr, x, y = kid_frame(c, t, s["dur"]); pos[c["who"]] = (x, y)
+    frames = [(c, *kid_frame(c, t, s["dur"])) for c in s.get("chars", [])]
+    for c, spr, x, y in frames: ground_shadow(img, x, GROUND - y)
+    for c, spr, x, y in frames:
+        pos[c["who"]] = (x, y)
         img.alpha_composite(spr, (int(x - CW / 2), int(y - CH)))
     for p in s.get("props", []):
         if p.get("layer") == "front": place_prop(img, p, t)
@@ -563,13 +660,15 @@ def s_story(s, spec, t):
             x, y = pos[b["who"]]; bubble(img, b["text"], x, y - CH - 10, t - b.get("at", 0.3))
         else:
             bubble(img, b["text"], b.get("x", 540), b.get("y", 700), t - b.get("at", 0.3))
+    img = camera(img, t, s["dur"])
     top_pill(img, f"STORY #{spec['story_no']}")
     narration_box(img, s["text"], t, s["dur"], s.get("lead", 0.3))
     return img
 
 
 def s_moral(s, spec, t):
-    img = bg_base(s.get("bg", "park")).copy(); clouds(img, t, s.get("bg", "park"))
+    img, ai = scene_bg(s.get("bg", "park"), spec)
+    if not ai: clouds(img, t, s.get("bg", "park"))
     img.alpha_composite(Image.new("RGBA", (W, H), (40, 20, 70, 150)))
     d = ImageDraw.Draw(img)
     f0 = font(56); lab = "STORY LESSON"

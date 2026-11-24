@@ -57,7 +57,21 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     gemini_api.narrate("  ...  ".join(lines), full)
     segs = assemble.split_by_pauses(full, len(lines), work, [len(l.split()) for l in lines])      # [(wav, seconds)] one per line
     durs = [max(3.4, L + 0.9) for _, L in segs[:-1]]
-    spec = cartoon_writer.stage(story, durs, story_no)
+    bg_images = {}
+    if os.environ.get("BG_MODE", "ai") == "ai":        # free AI 3D backgrounds (Cloudflare); drawn backgrounds if it fails
+        kinds = []
+        for sc in story["scenes"]:
+            k = sc.get("bg") if sc.get("bg") in cartoon_writer.BGS else "park"
+            if k not in kinds: kinds.append(k)
+        for j, k in enumerate(kinds):
+            pth = os.path.join(work, f"bg_{k}.jpg")
+            try:
+                images_api.generate_still(cartoon_writer.bg_prompt(k), pth, 500 + story_no * 11 + j)
+                bg_images[k] = pth
+            except Exception as e:
+                print(f"  background '{k}': AI picture failed ({str(e)[:120]}), using the drawn one", flush=True)
+    spec = cartoon_writer.stage(story, durs, story_no, ai_bgs=tuple(bg_images))
+    spec["bg_images"] = bg_images
     cartoon_writer.add_moral(spec, story, max(4.5, segs[-1][1] + 1.6))
     os.makedirs(os.path.join(ROOT, "specs"), exist_ok=True)
     json.dump({"story": story, "cartoon": spec}, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)

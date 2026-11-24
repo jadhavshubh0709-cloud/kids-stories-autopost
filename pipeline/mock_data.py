@@ -51,7 +51,14 @@ def mock_clip(prompt, out):
 
 
 def mock_voice(text, out):
-    d = max(1.5, len(text.split()) / 2.6)
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", f"sine=f=330:d={d}",
-                    "-af", "volume=0.3", "-ar", "24000", "-ac", "1", out], check=True)
+    """Tone per line, with 0.7 s of silence where the text has '...' (like a real narrator's pause)."""
+    lines = [l for l in text.split("...") if l.strip()]
+    filt, inputs = [], []
+    for i, l in enumerate(lines):
+        d = max(1.2, len(l.split()) / 2.6)
+        inputs += ["-f", "lavfi", "-i", f"sine=f={300 + 40 * i}:d={d}", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono:d=0.7"]
+    n = len(inputs) // 4
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex",
+                    "".join(f"[{k}:a]aresample=24000,aformat=channel_layouts=mono[a{k}];" for k in range(n)) +
+                    "".join(f"[a{k}]" for k in range(n)) + f"concat=n={n}:v=0:a=1,volume=0.3", "-ar", "24000", "-ac", "1", out], check=True)
     return out

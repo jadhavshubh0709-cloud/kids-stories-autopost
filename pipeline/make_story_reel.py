@@ -49,24 +49,23 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     if story.get("music") not in ("playful", "gentle", "adventure"): story["music"] = "playful"
     if "#twinheros" not in story["caption"]: story["caption"] = story["caption"].rstrip() + " #twinheros"
     print(f"  Story #{story_no}: {story['title']}", flush=True)
-    voices, durs = [], []
-    for i, sc in enumerate(story["scenes"]):
-        v = os.path.join(work, f"voice{i}.wav")
-        gemini_api.narrate(sc["narration"], v)
-        if not gemini_api.MOCK: time.sleep(int(os.environ.get("TTS_PAUSE", "7")))
-        voices.append(v); durs.append(max(3.6, assemble.duration(v) + 1.0))
-    mv = os.path.join(work, "voice_moral.wav")
-    gemini_api.narrate(f"Remember, {story['moral_line']}", mv)
+    # ONE voice request for the whole story (free tier allows only ~10 voice requests a day).
+    lines = [sc["narration"].strip() for sc in story["scenes"]] + [f"Remember, {story['moral_line']}"]
+    full = os.path.join(work, "voice_full.wav")
+    gemini_api.narrate("  ...  ".join(lines), full)
+    segs = assemble.split_by_pauses(full, len(lines), work)      # [(wav, seconds)] one per line
+    durs = [max(3.4, L + 0.9) for _, L in segs[:-1]]
     spec = cartoon_writer.stage(story, durs, story_no)
-    cartoon_writer.add_moral(spec, story, max(4.5, assemble.duration(mv) + 1.4))
+    cartoon_writer.add_moral(spec, story, max(4.5, segs[-1][1] + 1.6))
     os.makedirs(os.path.join(ROOT, "specs"), exist_ok=True)
     json.dump({"story": story, "cartoon": spec}, open(os.path.join(ROOT, "specs", f"{date}.json"), "w"), indent=2, ensure_ascii=False)
     silent = os.path.join(work, "silent.mp4")
     cartoon_engine.render(spec, silent)
+    # each narration line starts just after its scene starts
     starts, t = [], 0.0
-    for s in spec["scenes"]:
-        starts.append(t); t += s["dur"]
-    tracks = [(v, starts[i + 1] + 0.3) for i, v in enumerate(voices)] + [(mv, starts[-1] + 0.4)]
+    for sc_ in spec["scenes"]:
+        starts.append(t); t += sc_["dur"]
+    tracks = [(wav, starts[i + 1] + (0.3 if i < len(lines) - 1 else 0.4)) for i, (wav, _) in enumerate(segs)]
     os.makedirs(out_dir, exist_ok=True)
     total = assemble.mix_voices(silent, tracks, os.path.join(ROOT, "music", story["music"] + ".m4a"), os.path.join(out_dir, "reel.mp4"))
     open(os.path.join(out_dir, "caption.txt"), "w").write(story["caption"].strip() + "\n")

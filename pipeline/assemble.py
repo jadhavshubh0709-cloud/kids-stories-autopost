@@ -194,3 +194,34 @@ def mix_voices(silent_video, voices, music_path, out_mp4):
     run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", fc, "-map", "0:v", "-map", "[a]",
          "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-t", str(total), "-movflags", "+faststart", out_mp4])
     return total
+
+
+
+def split_by_pauses(src, n, work):
+    """Split one narration recording into n lines at the n-1 longest pauses (we put a pause between lines).
+    Returns [(wav_path, length_seconds)]. Falls back to equal-word timing if pauses can't be found."""
+    import array, wave
+    with wave.open(src) as w:
+        rate, ch, frames = w.getframerate(), w.getnchannels(), w.getnframes()
+        pcm = array.array("h", w.readframes(frames))
+    mono = pcm[::ch]; step = int(0.02 * rate)
+    energy = [max(abs(v) for v in mono[i:i + step]) if mono[i:i + step] else 0 for i in range(0, len(mono), step)]
+    peak = max(energy) or 1; thr = peak * 0.04
+    runs, start = [], None
+    for k, e in enumerate(energy + [peak]):
+        if e < thr and start is None: start = k
+        elif e >= thr and start is not None:
+            if start > 0 and k < len(energy): runs.append((k - start, start, k))
+            start = None
+    total = len(mono) / rate
+    cuts = sorted(((a + b) / 2 * 0.02) for _, a, b in sorted(runs, reverse=True)[:n - 1])
+    if len(cuts) < n - 1:
+        cuts = [total * (i + 1) / n for i in range(n - 1)]
+    edges = [0.0] + cuts + [total]
+    out = []
+    for i in range(n):
+        seg = os.path.join(work, f"line{i}.wav")
+        run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-ss", f"{edges[i]:.3f}", "-to", f"{edges[i + 1]:.3f}",
+             "-af", "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse", seg])
+        out.append((seg, duration(seg)))
+    return out

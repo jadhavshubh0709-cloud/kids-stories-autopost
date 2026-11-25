@@ -1,0 +1,358 @@
+{
+  "story": {
+    "title": "Aarav Tells the Truth",
+    "cast": [
+      "aarav",
+      "meera"
+    ],
+    "moral_line": "Speaking the truth brings true joy",
+    "question": "How do you help your little one practice honesty at home?",
+    "music": "gentle",
+    "caption": "Telling the truth is always the best choice! 🌟\n\nHow do you help your little one practice honesty at home?\n\nA new story every day ✨ Follow @kahani.time.kids\n\n#parenting #moralstories #indianparents #toddlerlife #kidsstories #characterbuilding #honesty #kahanitimekids",
+    "scenes": [
+      {
+        "bg": "home",
+        "narration": "Aarav found a colorful book on the table and read it happily.",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "centre",
+            "action": "idle",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "aarav",
+            "text": "Such a nice book!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Meera came into the room looking sad because her book was missing.",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "left",
+            "action": "droop",
+            "mood": "surprised"
+          },
+          {
+            "who": "meera",
+            "place": "right",
+            "action": "walk",
+            "walk_to": "centre_right",
+            "mood": "sad"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "place": "ground_left"
+          }
+        ],
+        "say": [
+          {
+            "who": "meera",
+            "text": "Where is my book?"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Aarav felt bad for keeping it a secret. He decided to speak the truth.",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "centre_left",
+            "action": "point",
+            "mood": "sad"
+          },
+          {
+            "who": "meera",
+            "place": "centre_right",
+            "action": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "aarav",
+            "text": "I took your book!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "home",
+        "narration": "Aarav handed the book back to Meera, and Meera smiled warmly.",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "centre_left",
+            "action": "wave",
+            "mood": "smile"
+          },
+          {
+            "who": "meera",
+            "place": "centre_right",
+            "action": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "place": "table"
+          }
+        ],
+        "say": [
+          {
+            "who": "meera",
+            "text": "Thank you for telling!"
+          }
+        ],
+        "sparkle": true
+      },
+      {
+        "bg": "home",
+        "narration": "Aarav learned that telling the truth makes everyone happy and proud.",
+        "chars": [
+          {
+            "who": "aarav",
+            "place": "centre_left",
+            "action": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "meera",
+            "place": "centre_right",
+            "action": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "place": "sky",
+            "motion": "float"
+          }
+        ],
+        "say": [
+          {
+            "who": "aarav",
+            "text": "Truth makes us happy!"
+          }
+        ],
+        "sparkle": true
+      }
+    ],
+    "story_no": 2,
+    "moral": "honesty"
+  },
+  "cartoon": {
+    "title": "Aarav Tells the Truth",
+    "story_no": 2,
+    "cast": [
+      "aarav",
+      "meera"
+    ],
+    "scenes": [
+      {
+        "type": "title",
+        "bg": "park",
+        "dur": 3.0
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 6.51,
+        "text": "Aarav found a colorful book on the table and read it happily.",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 540,
+            "act": "idle",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "x": 540,
+            "y": 1160,
+            "layer": "back"
+          }
+        ],
+        "say": [
+          {
+            "text": "Such a nice book!",
+            "at": 0.3,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 6.45,
+        "text": "Meera came into the room looking sad because her book was missing.",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 260,
+            "act": "droop",
+            "mood": "surprised"
+          },
+          {
+            "who": "meera",
+            "x": 820,
+            "act": "bounce",
+            "mood": "sad"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "x": 150,
+            "y": 1340,
+            "layer": "front"
+          }
+        ],
+        "say": [
+          {
+            "text": "Where is my book?",
+            "at": 0.3,
+            "who": "meera"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 7.24,
+        "text": "Aarav felt bad for keeping it a secret. He decided to speak the truth.",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 390,
+            "act": "point",
+            "mood": "sad"
+          },
+          {
+            "who": "meera",
+            "x": 690,
+            "act": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "I took your book!",
+            "at": 0.3,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 6.4,
+        "text": "Aarav handed the book back to Meera, and Meera smiled warmly.",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 390,
+            "act": "wave",
+            "mood": "smile"
+          },
+          {
+            "who": "meera",
+            "x": 690,
+            "act": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "book",
+            "x": 540,
+            "y": 1160,
+            "layer": "back"
+          }
+        ],
+        "say": [
+          {
+            "text": "Thank you for telling!",
+            "at": 0.3,
+            "who": "meera"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "home",
+        "dur": 6.27,
+        "text": "Aarav learned that telling the truth makes everyone happy and proud.",
+        "chars": [
+          {
+            "who": "aarav",
+            "x": 390,
+            "act": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "meera",
+            "x": 690,
+            "act": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 640,
+            "layer": "back",
+            "anim": "float"
+          }
+        ],
+        "say": [
+          {
+            "text": "Truth makes us happy!",
+            "at": 0.3,
+            "who": "aarav"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "moral",
+        "bg": "park",
+        "dur": 5.09,
+        "text": "Speaking the truth brings true joy",
+        "question": "How do you help your little one practice honesty at home?"
+      }
+    ]
+  }
+}

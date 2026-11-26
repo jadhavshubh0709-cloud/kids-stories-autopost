@@ -1,170 +1,433 @@
 [
-  {"id": "last-laddoo", "title": "The Last Laddoo", "moral": "sharing", "moral_line": "Sharing makes happiness double!",
-   "cast": ["meera", "aarav"], "bg": "home",
-   "beats": ["Meera has three laddoos on her plate. She counts them happily: one, two, three!",
-             "Her friend Aarav comes in. His plate is empty, and he looks at the laddoos quietly.",
-             "Meera wants to eat all three. She picks one up... then sees Aarav's sad face.",
-             "Meera gives Aarav one laddoo, then breaks the last one into two halves - one for each.",
-             "They eat together and laugh. Meera says sharing made the laddoos taste twice as sweet."]},
-  {"id": "ball-and-pot", "title": "The Ball and the Pot", "moral": "honesty", "moral_line": "Always tell the truth!",
-   "cast": ["veer", "veera"], "bg": "home",
-   "beats": ["Veer kicks his ball inside the house, even though Maa said play outside.",
-             "Bump! The ball knocks Dadi's flower pot and the little plant flops over.",
-             "Veer wants to hide the ball and say nothing. Veera looks at him and waits.",
-             "Veer takes a deep breath and tells Maa the truth: it was me, I am sorry.",
-             "Maa hugs him for being honest. Veer and Veera replant it, and soon it blooms again."]},
-  {"id": "gappus-big-ears", "title": "Gappu's Big Ears", "moral": "being proud of who you are", "moral_line": "Be proud of who you are!",
-   "cast": ["gappu", "chiku", "bandu"], "bg": "jungle",
-   "beats": ["Gappu the baby elephant looks at his ears and droops. Why are my ears so big?",
-             "He sees Chiku's small ears and Bandu's tiny ears and wishes his were like theirs.",
-             "The sun gets very hot. Chiku and Bandu are tired and sweaty in the jungle.",
-             "Gappu flaps his big ears - whoosh, whoosh! A cool breeze for his friends!",
-             "Chiku and Bandu cheer. Gappu stands proud. His big ears are just right."]},
-  {"id": "not-yet-mango", "title": "Not Yet, Little Seed", "moral": "patience", "moral_line": "Good things take time!",
-   "cast": ["aarav"], "bg": "village",
-   "beats": ["Aarav plants a mango seed and asks, where is my mango? The ground says: not yet!",
-             "Every morning he waters it and peeks. Still nothing. Not yet, not yet!",
-             "Aarav feels cross and wants to stop. Then he keeps watering, day after day.",
-             "Many seasons later, a big mango tree stands tall, full of yellow mangoes.",
-             "Aarav shares the sweet mangoes with everyone. Waiting was worth it!"]},
-  {"id": "new-girl", "title": "The New Girl", "moral": "helping someone who is new", "moral_line": "Make new friends feel welcome!",
-   "cast": ["anya", "meera"], "bg": "school",
-   "beats": ["It is Anya's first day at a new school. She stands alone, holding her bag tightly.",
-             "Everyone already has a friend. Anya looks down at her shoes and feels very small.",
-             "Meera notices Anya. She remembers how scary her own first day was.",
-             "Meera walks over, waves, and shares her storybook. Want to read with me?",
-             "Anya smiles for the first time today. By lunch, they are best friends."]},
-  {"id": "kite-in-tree", "title": "The Kite in the Tree", "moral": "teamwork", "moral_line": "Together we can do more!",
-   "cast": ["veer", "veera", "gappu"], "bg": "park",
-   "beats": ["Veer and Veera fly their new kite high in the park. Up, up it goes!",
-             "Oh no - the kite gets stuck in the mango tree. Veer jumps, but it is too high.",
-             "Veera jumps too. Still too high. They both feel sad.",
-             "Gappu the elephant comes by. Veera stands on a rock, Gappu lifts his trunk, and together they free the kite.",
-             "The kite flies again, and the three of them take turns holding the string."]},
-  {"id": "sorry-ball", "title": "Veera Says Sorry", "moral": "saying sorry", "moral_line": "Sorry makes things better!",
-   "cast": ["veera", "veer"], "bg": "park",
-   "beats": ["Veer is playing with his red ball in the park, bouncing it happily.",
-             "Veera wants it NOW. She snatches the ball and runs away.",
-             "Veer sits down, sad. Veera looks back and her tummy feels funny.",
-             "Veera walks back, gives the ball, and says: I am sorry, Veer.",
-             "Veer smiles. They roll the ball to each other - playing together is more fun."]},
-  {"id": "thirsty-bird", "title": "The Thirsty Bird", "moral": "kindness to animals", "moral_line": "Be kind to every creature!",
-   "cast": ["aarav"], "bg": "home",
-   "beats": ["It is a hot summer day. A little bird sits on Aarav's window, too tired to sing.",
-             "Aarav sees its beak open. The bird is thirsty and there is no water anywhere.",
-             "Aarav puts a small bowl of water on the window, then waits quietly.",
-             "The bird drinks and drinks... then sings its happiest song.",
-             "Every morning now, the bird comes back to sing for Aarav. Kindness made a friend."]},
-  {"id": "mango-team", "title": "Mangoes for Everyone", "moral": "teamwork", "moral_line": "Teamwork makes it work!",
-   "cast": ["chiku", "bandu", "gappu"], "bg": "jungle",
-   "beats": ["Chiku, Bandu and Gappu see juicy mangoes high on a tree. Yum!",
-             "Chiku jumps, but she is too small. Gappu tries, but elephants cannot climb.",
-             "Bandu climbs up, but he cannot carry the mangoes down alone.",
-             "Then they work as a team: Bandu shakes the branch, Gappu catches, Chiku collects.",
-             "A big pile of mangoes - one for each of them, and some to share!"]},
-  {"id": "laddoo-truth", "title": "Two Laddoos, Not Three", "moral": "telling the truth even when it is hard", "moral_line": "Truth is always brave!",
-   "cast": ["meera"], "bg": "home",
-   "beats": ["Maa made three laddoos for the guests and kept them on the table.",
-             "Meera just wanted one tiny taste... and soon there were only two.",
-             "Maa asks, who ate a laddoo? Meera feels scared and wants to stay quiet.",
-             "Meera says softly: it was me, Maa. I am sorry.",
-             "Maa hugs her and says the truth is sweeter than any laddoo. Meera feels light and happy."]},
-  {"id": "star-counting", "title": "Counting Stars", "moral": "courage", "moral_line": "Brave hearts shine bright!",
-   "cast": ["anya", "veera"], "bg": "night",
-   "beats": ["Night comes, and Anya does not want to go outside. The dark feels scary.",
-             "Veera holds out her hand. Come, I want to show you something.",
-             "Anya takes one small brave step, then another.",
-             "Above them, the moon glows and a hundred stars twinkle. Anya starts to count them!",
-             "Anya laughs. The night is not scary - it is full of little lights."]},
-  {"id": "best-gift", "title": "The Best Gift", "moral": "love is the best gift", "moral_line": "Love is the best gift!",
-   "cast": ["veer"], "bg": "home",
-   "beats": ["Tomorrow is Dadi's birthday. Veer wants to give her a big gift.",
-             "But his piggy bank is empty. Veer droops - what can he give?",
-             "Then he has an idea. He draws a big red heart and writes: I love you, Dadi.",
-             "He wraps it like a gift and gives it to Dadi in the morning.",
-             "Dadi hugs him and keeps it on her shelf. It is her favourite gift ever."]},
-  {"id": "kindness-returns", "title": "Chiku and the Little Bird", "moral": "kindness comes back", "moral_line": "Kindness always comes back!",
-   "cast": ["chiku"], "bg": "park",
-   "beats": ["Chiku is eating a juicy mango when a hungry little bird lands nearby.",
-             "Chiku could eat it all, but she shares a big piece with the bird.",
-             "Later, Chiku's ball rolls into the tall grass. She looks and looks. It is lost!",
-             "The little bird flies high, spots the ball, and chirps: here, here!",
-             "Chiku gets her ball back and thanks her friend. Kindness came right back."]},
-  {"id": "share-new-ball", "title": "Tara's New Ball", "moral": "sharing", "moral_line": "Sharing makes play more fun!",
-   "cast": ["tara", "bandu", "chiku"], "bg": "jungle",
-   "beats": ["Tara the bear cub gets a shiny new ball. It is mine, only mine!",
-             "Bandu and Chiku ask to play, but Tara hugs the ball and walks away.",
-             "Tara plays alone. Bounce, catch, bounce... it is boring by herself.",
-             "Tara rolls the ball to Bandu. Bandu throws to Chiku. Chiku throws back to Tara!",
-             "Now the jungle is full of laughter. The ball was more fun shared."]},
-  {"id": "taking-turns", "title": "Whose Turn Is It?", "moral": "taking turns", "moral_line": "Wait for your turn!",
-   "cast": ["aarav", "anya", "meera"], "bg": "park",
-   "beats": ["Meera has a kite, and everyone wants a turn to fly it.",
-             "Aarav pushes in front - me first, me first!",
-             "Then he sees little Anya at the back. She has been waiting the longest.",
-             "Aarav steps back and says: Anya, you go first.",
-             "Anya's kite flies the highest of all, and everyone cheers - Aarav loudest of all."]},
-  {"id": "kept-promise", "title": "Veera's Promise", "moral": "keeping promises", "moral_line": "Always keep your promise!",
-   "cast": ["veera", "chiku"], "bg": "village",
-   "beats": ["Veera promises Chiku: after my homework, we will play ball together.",
-             "Homework done! But her friends call her to fly kites instead. Come, Veera!",
-             "Veera wants to go. Then she remembers Chiku waiting by the tree.",
-             "Veera runs to Chiku with the ball. I promised, and here I am!",
-             "Chiku hops with joy. A kept promise makes a friend feel special."]},
-  {"id": "plant-friend", "title": "The Thirsty Plant", "moral": "caring for plants and nature", "moral_line": "Plants need love too!",
-   "cast": ["anya"], "bg": "school",
-   "beats": ["In Anya's classroom, a little plant sits in a pot, drooping and dry.",
-             "Nobody notices it. Anya whispers: are you thirsty, little plant?",
-             "Every morning Anya gives it a little water, and checks its leaves.",
-             "One day, the plant stands tall and green, with a new pink flower!",
-             "The whole class claps. Anya smiles - a little care made it bloom."]},
-  {"id": "humble-bandu", "title": "Bandu Shows Off", "moral": "being humble", "moral_line": "Don't show off, help out!",
-   "cast": ["bandu", "tara"], "bg": "park",
-   "beats": ["Bandu the monkey boasts: I am the best kite flyer in the whole park!",
-             "He tugs and twirls to show off, and the kite string gets tangled. Oops!",
-             "The kite drops to the ground. Bandu feels silly and cross.",
-             "Tara quietly helps him untangle the string, knot by knot.",
-             "Bandu says thank you, Tara. This time they fly the kite together, no showing off."]},
-  {"id": "work-and-play", "title": "Bandu and Tara's Mangoes", "moral": "hard work", "moral_line": "Work first, then play!",
-   "cast": ["bandu", "tara"], "bg": "jungle",
-   "beats": ["All summer, Tara collects mangoes for the rainy days. Bandu just plays and swings.",
-             "Come play, Tara! Tara says: I will, after my work is done.",
-             "Rain comes. Bandu is hungry, but there are no mangoes left on the trees.",
-             "Tara shares her mangoes with Bandu. He says: next summer, I will help you!",
-             "Next summer, Bandu and Tara work together, then play together all evening."]},
-  {"id": "tidy-meera", "title": "Where Is My Book?", "moral": "keeping things clean", "moral_line": "A place for everything!",
-   "cast": ["meera"], "bg": "home",
-   "beats": ["Meera's toys and books are everywhere. Tomorrow is school, and she needs her storybook.",
-             "Morning comes. Where is my book? Not here, not there!",
-             "She is almost late. Meera looks so sad, and her room is so messy.",
-             "That evening, Meera puts every toy and book in its place.",
-             "Next morning, her book is right there on the table. Meera is the first to school!"]},
-  {"id": "gappu-helps", "title": "Gappu's Water Shower", "moral": "using your strength to help", "moral_line": "Use your gifts to help others!",
-   "cast": ["gappu", "aarav"], "bg": "village",
-   "beats": ["It is so hot in the village. All the flower pots are drooping and dry.",
-             "Aarav carries water in a tiny cup, but there are too many plants.",
-             "Gappu sees him. My trunk can carry lots of water!",
-             "Gappu fills his trunk and gives every plant a gentle shower - whoosh!",
-             "The flowers stand tall again. Aarav and Gappu laugh, all wet and happy."]},
-  {"id": "happy-for-friend", "title": "Aarav Claps for Meera", "moral": "being a good friend", "moral_line": "Be happy for your friends!",
-   "cast": ["aarav", "meera"], "bg": "park",
-   "beats": ["Aarav and Meera have a running race in the park. Ready, steady, go!",
-             "Meera wins! Aarav stops and folds his arms, feeling cross.",
-             "Meera looks back at him. Her smile gets smaller.",
-             "Aarav thinks for a moment, then claps: well done, Meera!",
-             "Meera teaches him her fast-start trick, and they race again, laughing all the way."]},
-  {"id": "lost-kitten", "title": "The Little Lost Kitten", "moral": "kindness", "moral_line": "A little kindness goes a long way!",
-   "cast": ["veer", "veera"], "bg": "night",
-   "beats": ["One evening, Veer and Veera hear a tiny sound: meow, meow!",
-             "A little kitten sits alone, lost and shivering.",
-             "Veera gently picks it up. Veer says: let's find your home.",
-             "They walk down the lane until a happy meow answers from a doorway - its family!",
-             "The kitten purrs goodbye. Veer and Veera walk home under the stars, smiling."]},
-  {"id": "thank-you-tree", "title": "Thank You, Mango Tree", "moral": "gratitude", "moral_line": "Always say thank you!",
-   "cast": ["bandu", "chiku"], "bg": "jungle",
-   "beats": ["Every day, Bandu eats sweet mangoes from the big tree. Yum, yum, yum!",
-             "Chiku asks: Bandu, did you ever say thank you to the tree?",
-             "Bandu scratches his head. Thank a tree? Why?",
-             "Chiku says: it gives us shade and mangoes every day. So Bandu waters the tree.",
-             "Now every morning Bandu says thank you, tree! And the mangoes feel even sweeter."]}
+ {
+  "id": "gappus-big-ears",
+  "title": "Gappu's Big Ears",
+  "moral": "being proud of who you are",
+  "moral_line": "Be proud of who you are!",
+  "cast": [
+   "gappu",
+   "chiku",
+   "bandu"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "Gappu the baby elephant looks at his ears and droops. Why are my ears so big?",
+   "He sees Chiku's small ears and Bandu's tiny ears and wishes his were like theirs.",
+   "The sun gets very hot. Chiku and Bandu are tired and sweaty in the jungle.",
+   "Gappu flaps his big ears - whoosh, whoosh! A cool breeze for his friends!",
+   "Chiku and Bandu cheer. Gappu stands proud. His big ears are just right."
+  ]
+ },
+ {
+  "id": "not-yet-mango",
+  "title": "Not Yet, Little Seed",
+  "moral": "patience",
+  "moral_line": "Good things take time!",
+  "cast": [
+   "aarav"
+  ],
+  "bg": "village",
+  "beats": [
+   "Aarav plants a mango seed and asks, where is my mango? The ground says: not yet!",
+   "Every morning he waters it and peeks. Still nothing. Not yet, not yet!",
+   "Aarav feels cross and wants to stop. Then he keeps watering, day after day.",
+   "Many seasons later, a big mango tree stands tall, full of yellow mangoes.",
+   "Aarav shares the sweet mangoes with everyone. Waiting was worth it!"
+  ]
+ },
+ {
+  "id": "kite-in-tree",
+  "title": "The Kite in the Tree",
+  "moral": "teamwork",
+  "moral_line": "Together we can do more!",
+  "cast": [
+   "veer",
+   "veera",
+   "gappu"
+  ],
+  "bg": "park",
+  "beats": [
+   "Veer and Veera fly their new kite high in the park. Up, up it goes!",
+   "Oh no - the kite gets stuck in the mango tree. Veer jumps, but it is too high.",
+   "Veera jumps too. Still too high. They both feel sad.",
+   "Gappu the elephant comes by. Veera stands on a rock, Gappu lifts his trunk, and together they free the kite.",
+   "The kite flies again, and the three of them take turns holding the string."
+  ]
+ },
+ {
+  "id": "star-counting",
+  "title": "Counting Stars",
+  "moral": "courage",
+  "moral_line": "Brave hearts shine bright!",
+  "cast": [
+   "anya",
+   "veera"
+  ],
+  "bg": "night",
+  "beats": [
+   "Night comes, and Anya does not want to go outside. The dark feels scary.",
+   "Veera holds out her hand. Come, I want to show you something.",
+   "Anya takes one small brave step, then another.",
+   "Above them, the moon glows and a hundred stars twinkle. Anya starts to count them!",
+   "Anya laughs. The night is not scary - it is full of little lights."
+  ]
+ },
+ {
+  "id": "new-girl",
+  "title": "The New Girl",
+  "moral": "helping someone who is new",
+  "moral_line": "Make new friends feel welcome!",
+  "cast": [
+   "anya",
+   "meera"
+  ],
+  "bg": "school",
+  "beats": [
+   "It is Anya's first day at a new school. She stands alone, holding her bag tightly.",
+   "Everyone already has a friend. Anya looks down at her shoes and feels very small.",
+   "Meera notices Anya. She remembers how scary her own first day was.",
+   "Meera walks over, waves, and shares her storybook. Want to read with me?",
+   "Anya smiles for the first time today. By lunch, they are best friends."
+  ]
+ },
+ {
+  "id": "thank-you-tree",
+  "title": "Thank You, Mango Tree",
+  "moral": "gratitude",
+  "moral_line": "Always say thank you!",
+  "cast": [
+   "bandu",
+   "chiku"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "Every day, Bandu eats sweet mangoes from the big tree. Yum, yum, yum!",
+   "Chiku asks: Bandu, did you ever say thank you to the tree?",
+   "Bandu scratches his head. Thank a tree? Why?",
+   "Chiku says: it gives us shade and mangoes every day. So Bandu waters the tree.",
+   "Now every morning Bandu says thank you, tree! And the mangoes feel even sweeter."
+  ]
+ },
+ {
+  "id": "sorry-ball",
+  "title": "Veera Says Sorry",
+  "moral": "saying sorry",
+  "moral_line": "Sorry makes things better!",
+  "cast": [
+   "veera",
+   "veer"
+  ],
+  "bg": "park",
+  "beats": [
+   "Veer is playing with his red ball in the park, bouncing it happily.",
+   "Veera wants it NOW. She snatches the ball and runs away.",
+   "Veer sits down, sad. Veera looks back and her tummy feels funny.",
+   "Veera walks back, gives the ball, and says: I am sorry, Veer.",
+   "Veer smiles. They roll the ball to each other - playing together is more fun."
+  ]
+ },
+ {
+  "id": "chiku-listens",
+  "title": "Chiku Learns to Listen",
+  "moral": "listening carefully",
+  "moral_line": "Listen first, then play!",
+  "cast": [
+   "chiku",
+   "tara"
+  ],
+  "bg": "park",
+  "beats": [
+   "Tara has a new ball game: roll the ball, and the other one catches it at the tree.",
+   "Chiku is too excited to listen. Hop, hop, hop! She runs the wrong way.",
+   "The ball rolls past her again and again. Chiku feels cross - this game is too hard!",
+   "Tara smiles and explains once more. This time Chiku stands still and listens.",
+   "Roll... catch! Chiku gets it right. Listening made the game so much fun."
+  ]
+ },
+ {
+  "id": "kept-promise",
+  "title": "Veera's Promise",
+  "moral": "keeping promises",
+  "moral_line": "Always keep your promise!",
+  "cast": [
+   "veera",
+   "chiku"
+  ],
+  "bg": "village",
+  "beats": [
+   "Veera promises Chiku: after my homework, we will play ball together.",
+   "Homework done! But her friends call her to fly kites instead. Come, Veera!",
+   "Veera wants to go. Then she remembers Chiku waiting by the tree.",
+   "Veera runs to Chiku with the ball. I promised, and here I am!",
+   "Chiku hops with joy. A kept promise makes a friend feel special."
+  ]
+ },
+ {
+  "id": "best-gift",
+  "title": "The Best Gift",
+  "moral": "love is the best gift",
+  "moral_line": "Love is the best gift!",
+  "cast": [
+   "veer"
+  ],
+  "bg": "home",
+  "beats": [
+   "Tomorrow is Dadi's birthday. Veer wants to give her a big gift.",
+   "But his piggy bank is empty. Veer droops - what can he give?",
+   "Then he has an idea. He draws a big red heart and writes: I love you, Dadi.",
+   "He wraps it like a gift and gives it to Dadi in the morning.",
+   "Dadi hugs him and keeps it on her shelf. It is her favourite gift ever."
+  ]
+ },
+ {
+  "id": "humble-bandu",
+  "title": "Bandu Shows Off",
+  "moral": "being humble",
+  "moral_line": "Don't show off, help out!",
+  "cast": [
+   "bandu",
+   "tara"
+  ],
+  "bg": "park",
+  "beats": [
+   "Bandu the monkey boasts: I am the best kite flyer in the whole park!",
+   "He tugs and twirls to show off, and the kite string gets tangled. Oops!",
+   "The kite drops to the ground. Bandu feels silly and cross.",
+   "Tara quietly helps him untangle the string, knot by knot.",
+   "Bandu says thank you, Tara. This time they fly the kite together, no showing off."
+  ]
+ },
+ {
+  "id": "plant-friend",
+  "title": "The Thirsty Plant",
+  "moral": "caring for plants and nature",
+  "moral_line": "Plants need love too!",
+  "cast": [
+   "anya"
+  ],
+  "bg": "school",
+  "beats": [
+   "In Anya's classroom, a little plant sits in a pot, drooping and dry.",
+   "Nobody notices it. Anya whispers: are you thirsty, little plant?",
+   "Every morning Anya gives it a little water, and checks its leaves.",
+   "One day, the plant stands tall and green, with a new pink flower!",
+   "The whole class claps. Anya smiles - a little care made it bloom."
+  ]
+ },
+ {
+  "id": "kind-words",
+  "title": "Bandu's Kind Words",
+  "moral": "using kind words",
+  "moral_line": "Kind words make friends strong!",
+  "cast": [
+   "bandu",
+   "tara"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "Bandu and Tara play catch in the jungle. Tara drops the ball. Bandu laughs: butterfingers!",
+   "Tara droops. She drops the ball again, and this time she wants to stop playing.",
+   "Bandu remembers how sad he felt when someone laughed at him.",
+   "Bandu says: sorry, Tara. You can do it - try again!",
+   "Tara tries again... and catches it! They both jump with joy. Kind words helped her."
+  ]
+ },
+ {
+  "id": "taking-turns",
+  "title": "Whose Turn Is It?",
+  "moral": "taking turns",
+  "moral_line": "Wait for your turn!",
+  "cast": [
+   "aarav",
+   "anya",
+   "meera"
+  ],
+  "bg": "park",
+  "beats": [
+   "Meera has a kite, and everyone wants a turn to fly it.",
+   "Aarav pushes in front - me first, me first!",
+   "Then he sees little Anya at the back. She has been waiting the longest.",
+   "Aarav steps back and says: Anya, you go first.",
+   "Anya's kite flies the highest of all, and everyone cheers - Aarav loudest of all."
+  ]
+ },
+ {
+  "id": "work-and-play",
+  "title": "Bandu and Tara's Mangoes",
+  "moral": "hard work",
+  "moral_line": "Work first, then play!",
+  "cast": [
+   "bandu",
+   "tara"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "All summer, Tara collects mangoes for the rainy days. Bandu just plays and swings.",
+   "Come play, Tara! Tara says: I will, after my work is done.",
+   "Rain comes. Bandu is hungry, but there are no mangoes left on the trees.",
+   "Tara shares her mangoes with Bandu. He says: next summer, I will help you!",
+   "Next summer, Bandu and Tara work together, then play together all evening."
+  ]
+ },
+ {
+  "id": "tidy-meera",
+  "title": "Where Is My Book?",
+  "moral": "keeping things clean",
+  "moral_line": "A place for everything!",
+  "cast": [
+   "meera"
+  ],
+  "bg": "home",
+  "beats": [
+   "Meera's toys and books are everywhere. Tomorrow is school, and she needs her storybook.",
+   "Morning comes. Where is my book? Not here, not there!",
+   "She is almost late. Meera looks so sad, and her room is so messy.",
+   "That evening, Meera puts every toy and book in its place.",
+   "Next morning, her book is right there on the table. Meera is the first to school!"
+  ]
+ },
+ {
+  "id": "kindness-returns",
+  "title": "Chiku and the Little Bird",
+  "moral": "kindness comes back",
+  "moral_line": "Kindness always comes back!",
+  "cast": [
+   "chiku"
+  ],
+  "bg": "park",
+  "beats": [
+   "Chiku is eating a juicy mango when a hungry little bird lands nearby.",
+   "Chiku could eat it all, but she shares a big piece with the bird.",
+   "Later, Chiku's ball rolls into the tall grass. She looks and looks. It is lost!",
+   "The little bird flies high, spots the ball, and chirps: here, here!",
+   "Chiku gets her ball back and thanks her friend. Kindness came right back."
+  ]
+ },
+ {
+  "id": "ball-and-pot",
+  "title": "The Ball and the Pot",
+  "moral": "honesty",
+  "moral_line": "Always tell the truth!",
+  "cast": [
+   "veer",
+   "veera"
+  ],
+  "bg": "home",
+  "beats": [
+   "Veer kicks his ball inside the house, even though Maa said play outside.",
+   "Bump! The ball knocks Dadi's flower pot and the little plant flops over.",
+   "Veer wants to hide the ball and say nothing. Veera looks at him and waits.",
+   "Veer takes a deep breath and tells Maa the truth: it was me, I am sorry.",
+   "Maa hugs him for being honest. Veer and Veera replant it, and soon it blooms again."
+  ]
+ },
+ {
+  "id": "happy-for-friend",
+  "title": "Aarav Claps for Meera",
+  "moral": "being a good friend",
+  "moral_line": "Be happy for your friends!",
+  "cast": [
+   "aarav",
+   "meera"
+  ],
+  "bg": "park",
+  "beats": [
+   "Aarav and Meera have a running race in the park. Ready, steady, go!",
+   "Meera wins! Aarav stops and folds his arms, feeling cross.",
+   "Meera looks back at him. Her smile gets smaller.",
+   "Aarav thinks for a moment, then claps: well done, Meera!",
+   "Meera teaches him her fast-start trick, and they race again, laughing all the way."
+  ]
+ },
+ {
+  "id": "gappu-helps",
+  "title": "Gappu's Water Shower",
+  "moral": "using your strength to help",
+  "moral_line": "Use your gifts to help others!",
+  "cast": [
+   "gappu",
+   "aarav"
+  ],
+  "bg": "village",
+  "beats": [
+   "It is so hot in the village. All the flower pots are drooping and dry.",
+   "Aarav carries water in a tiny cup, but there are too many plants.",
+   "Gappu sees him. My trunk can carry lots of water!",
+   "Gappu fills his trunk and gives every plant a gentle shower - whoosh!",
+   "The flowers stand tall again. Aarav and Gappu laugh, all wet and happy."
+  ]
+ },
+ {
+  "id": "mango-team",
+  "title": "Mangoes for Everyone",
+  "moral": "teamwork",
+  "moral_line": "Teamwork makes it work!",
+  "cast": [
+   "chiku",
+   "bandu",
+   "gappu"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "Chiku, Bandu and Gappu see juicy mangoes high on a tree. Yum!",
+   "Chiku jumps, but she is too small. Gappu tries, but elephants cannot climb.",
+   "Bandu climbs up, but he cannot carry the mangoes down alone.",
+   "Then they work as a team: Bandu shakes the branch, Gappu catches, Chiku collects.",
+   "A big pile of mangoes - one for each of them, and some to share!"
+  ]
+ },
+ {
+  "id": "share-new-ball",
+  "title": "Tara's New Ball",
+  "moral": "sharing",
+  "moral_line": "Sharing makes play more fun!",
+  "cast": [
+   "tara",
+   "bandu",
+   "chiku"
+  ],
+  "bg": "jungle",
+  "beats": [
+   "Tara the bear cub gets a shiny new ball. It is mine, only mine!",
+   "Bandu and Chiku ask to play, but Tara hugs the ball and walks away.",
+   "Tara plays alone. Bounce, catch, bounce... it is boring by herself.",
+   "Tara rolls the ball to Bandu. Bandu throws to Chiku. Chiku throws back to Tara!",
+   "Now the jungle is full of laughter. The ball was more fun shared."
+  ]
+ },
+ {
+  "id": "lost-kitten",
+  "title": "The Little Lost Kitten",
+  "moral": "kindness",
+  "moral_line": "A little kindness goes a long way!",
+  "cast": [
+   "veer",
+   "veera"
+  ],
+  "bg": "night",
+  "beats": [
+   "One evening, Veer and Veera hear a tiny sound: meow, meow!",
+   "A little kitten sits alone, lost and shivering.",
+   "Veera gently picks it up. Veer says: let's find your home.",
+   "They walk down the lane until a happy meow answers from a doorway - its family!",
+   "The kitten purrs goodbye. Veer and Veera walk home under the stars, smiling."
+  ]
+ },
+ {
+  "id": "thirsty-bird",
+  "title": "The Thirsty Bird",
+  "moral": "kindness to animals",
+  "moral_line": "Be kind to every creature!",
+  "cast": [
+   "aarav"
+  ],
+  "bg": "home",
+  "beats": [
+   "It is a hot summer day. A little bird sits on Aarav's window, too tired to sing.",
+   "Aarav sees its beak open. The bird is thirsty and there is no water anywhere.",
+   "Aarav puts a small bowl of water on the window, then waits quietly.",
+   "The bird drinks and drinks... then sings its happiest song.",
+   "Every morning now, the bird comes back to sing for Aarav. Kindness made a friend."
+  ]
+ }
 ]

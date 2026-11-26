@@ -197,6 +197,7 @@ def next_idea(history, bank_path):
     import json, os
     if not os.path.exists(bank_path): return None
     used = {h.get("idea") for h in history} | {h.get("title") for h in history}
-    for idea in json.load(open(bank_path, encoding="utf-8")):
-        if idea["id"] not in used and idea["title"] not in used: return idea
-    return None
+    left = [i for i in json.load(open(bank_path, encoding="utf-8")) if i["id"] not in used and i["title"] not in used]
+    recent_morals = {h.get("moral") for h in history[-5:]}
+    # never repeat a lesson that was taught in the last 5 stories, if any other story is left
+    return next((i for i in left if i["moral"] not in recent_morals), left[0] if left else None)

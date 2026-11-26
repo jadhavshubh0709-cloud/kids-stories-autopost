@@ -1,0 +1,374 @@
+{
+  "story": {
+    "title": "Anya Shares a Treat",
+    "cast": [
+      "anya",
+      "chiku"
+    ],
+    "moral_line": "Be kind to all animals",
+    "question": "How do your kids show kindness to animals?",
+    "music": "gentle",
+    "caption": "Anya helps a hungry bunny in the park! 🐰✨\n\nHow do your kids show kindness to animals?\n\nA new story every day ✨ Follow @kahani.time.kids\n\n#moralstories #kidsanimation #parentingindia #kindnesstoanimals #kahani #indianparents #toddlerlearning #kahanitimekids",
+    "scenes": [
+      {
+        "bg": "park",
+        "narration": "Anya was playing in the sunny park. She saw Chiku the bunny sitting all alone.",
+        "chars": [
+          {
+            "who": "anya",
+            "place": "left",
+            "action": "walk",
+            "mood": "happy",
+            "walk_to": "centre_left"
+          },
+          {
+            "who": "chiku",
+            "place": "right",
+            "action": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "chiku",
+            "text": "I am hungry"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "park",
+        "narration": "Anya wanted to help her tiny friend. She pointed to a juicy mango on the ground.",
+        "chars": [
+          {
+            "who": "anya",
+            "place": "centre_left",
+            "action": "point",
+            "mood": "smile"
+          },
+          {
+            "who": "chiku",
+            "place": "right",
+            "action": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [
+          {
+            "kind": "mango",
+            "place": "ground_centre",
+            "motion": "bob"
+          }
+        ],
+        "say": [
+          {
+            "who": "anya",
+            "text": "Here is food!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "park",
+        "narration": "Chiku hopped over to the fresh mango and took a big bite.",
+        "chars": [
+          {
+            "who": "anya",
+            "place": "centre_left",
+            "action": "idle",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "place": "centre_right",
+            "action": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "mango",
+            "place": "ground_centre"
+          }
+        ],
+        "say": [
+          {
+            "who": "chiku",
+            "text": "Yummy mango!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "park",
+        "narration": "Chiku felt happy and energized. He showed his love to kind little Anya.",
+        "chars": [
+          {
+            "who": "anya",
+            "place": "centre_left",
+            "action": "wave",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "place": "centre_right",
+            "action": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "place": "sky",
+            "motion": "float"
+          }
+        ],
+        "say": [
+          {
+            "who": "chiku",
+            "text": "Thank you Anya!"
+          }
+        ],
+        "sparkle": true
+      },
+      {
+        "bg": "park",
+        "narration": "Anya learned that caring for small animals makes everyone feel joyful.",
+        "chars": [
+          {
+            "who": "anya",
+            "place": "centre_left",
+            "action": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "place": "centre_right",
+            "action": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "place": "sky",
+            "motion": "sway"
+          }
+        ],
+        "say": [
+          {
+            "who": "anya",
+            "text": "We are friends!"
+          }
+        ],
+        "sparkle": true
+      }
+    ],
+    "story_no": 3,
+    "moral": "kindness to animals"
+  },
+  "cartoon": {
+    "title": "Anya Shares a Treat",
+    "story_no": 3,
+    "cast": [
+      "anya",
+      "chiku"
+    ],
+    "scenes": [
+      {
+        "type": "title",
+        "bg": "park",
+        "dur": 3.0
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 9.3,
+        "text": "Anya was playing in the sunny park. She saw Chiku the bunny sitting all alone.",
+        "chars": [
+          {
+            "who": "anya",
+            "x": 260,
+            "act": "bounce",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "x": 820,
+            "act": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "I am hungry",
+            "at": 0.3,
+            "who": "chiku"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 7.88,
+        "text": "Anya wanted to help her tiny friend. She pointed to a juicy mango on the ground.",
+        "chars": [
+          {
+            "who": "anya",
+            "x": 390,
+            "act": "point",
+            "mood": "smile"
+          },
+          {
+            "who": "chiku",
+            "x": 820,
+            "act": "idle",
+            "mood": "surprised"
+          }
+        ],
+        "props": [
+          {
+            "kind": "mango",
+            "x": 540,
+            "y": 1380,
+            "layer": "front",
+            "anim": "bob"
+          }
+        ],
+        "say": [
+          {
+            "text": "Here is food!",
+            "at": 0.3,
+            "who": "anya"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 5.76,
+        "text": "Chiku hopped over to the fresh mango and took a big bite.",
+        "chars": [
+          {
+            "who": "anya",
+            "x": 390,
+            "act": "idle",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "x": 690,
+            "act": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "mango",
+            "x": 540,
+            "y": 1380,
+            "layer": "front"
+          }
+        ],
+        "say": [
+          {
+            "text": "Yummy mango!",
+            "at": 0.3,
+            "who": "chiku"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 7.84,
+        "text": "Chiku felt happy and energized. He showed his love to kind little Anya.",
+        "chars": [
+          {
+            "who": "anya",
+            "x": 390,
+            "act": "wave",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "x": 690,
+            "act": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 640,
+            "layer": "back",
+            "anim": "float"
+          }
+        ],
+        "say": [
+          {
+            "text": "Thank you Anya!",
+            "at": 0.3,
+            "who": "chiku"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "park",
+        "dur": 6.99,
+        "text": "Anya learned that caring for small animals makes everyone feel joyful.",
+        "chars": [
+          {
+            "who": "anya",
+            "x": 390,
+            "act": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "x": 690,
+            "act": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [
+          {
+            "kind": "heart",
+            "x": 540,
+            "y": 640,
+            "layer": "back",
+            "anim": "sway"
+          }
+        ],
+        "say": [
+          {
+            "text": "We are friends!",
+            "at": 0.3,
+            "who": "anya"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "moral",
+        "bg": "park",
+        "dur": 5.33,
+        "text": "Be kind to all animals",
+        "question": "How do your kids show kindness to animals?"
+      }
+    ]
+  }
+}

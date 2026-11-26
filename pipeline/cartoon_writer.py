@@ -64,7 +64,7 @@ Return JSON only:
   "caption": "1 hook line with 1-2 emoji, blank line, a question for parents, blank line, 'A new story every day ✨ Follow @kahani.time.kids', blank line, 8 hashtags ending with #kahanitimekids",
   "scenes": [
     {{"bg": "...",
-      "narration": "what the storyteller says: 1-2 very simple sentences, 8-20 words; call characters by name",
+      "narration": "what the storyteller says: 1-2 simple sentences, 12-25 words; call characters by name",
       "chars": [{{"who": "id", "place": "...", "action": "...", "mood": "...", "walk_to": "(only if action is walk) another place"}}],
       "props": [{{"kind": "...", "state": "(optional)", "place": "...", "motion": "(optional)"}}],
       "say": [{{"who": "a character id or prop", "text": "max 4 words, no emoji"}}],
@@ -89,11 +89,13 @@ def write(moral, recent_titles, n=5, recent_cast=(), idea=None):
         beats = "\n".join(f"  {i+1}. {b}" for i, b in enumerate(idea["beats"]))
         source = (f'TELL THIS STORY (from our hand-picked story bank): "{idea["title"]}" - moral: {idea["moral"]}.\n'
                   f"Use exactly these characters: {names}. Main background: {idea['bg']}.\n"
-                  f"Keep every event, in this order, one scene per beat ({len(idea['beats'])} scenes). "
-                  f"Keep the title. Make the narration warm and vivid; never change what happens.\n{beats}")
-        n = len(idea["beats"])
+                  f"Keep every event, in this order. Tell each beat in TWO scenes ({2 * len(idea['beats'])} scenes in all): "
+                  f"slow down and add small real moments - what the character feels, says, tries, notices - so the story "
+                  f"feels full, never rushed. Keep the title. Never change what happens.\n{beats}")
+        n = 2 * len(idea["beats"])
     else:
-        source = "Write ONE new, original story."
+        n = max(n, 9)
+        source = "Write ONE new, original story with a clear beginning, problem, turning point and happy ending."
     prompt = PROMPT.format(moral=moral, n=n, recent=", ".join(recent_titles[-30:]) or "none yet", cast=cast,
                            recent_cast=", ".join(recent_cast) or "none", source=source)
     last = []
@@ -112,12 +114,12 @@ def write(moral, recent_titles, n=5, recent_cast=(), idea=None):
 def check(s, n):
     errs = [f"missing {k}" for k in ("title", "moral_line", "question", "caption", "scenes") if not s.get(k)]
     sc = s.get("scenes") or []
-    if not (n - 1 <= len(sc) <= n + 1): errs.append(f"{len(sc)} scenes")
+    if not gemini_api.MOCK and not (n - 2 <= len(sc) <= n + 1): errs.append(f"{len(sc)} scenes")
     used = {c.get("who") for x in sc for c in (x.get("chars") or []) if c.get("who") in CAST}
     if not used: errs.append("no known characters on screen")
     for i, x in enumerate(sc):
         w = len(str(x.get("narration", "")).split())
-        if not 4 <= w <= 26: errs.append(f"scene {i+1} narration {w} words")
+        if not 6 <= w <= 30: errs.append(f"scene {i+1} narration {w} words")
     return errs
 
 

@@ -14,5 +14,14 @@
       "aarav",
       "meera"
     ]
+  },
+  {
+    "date": "2026-11-26",
+    "story_no": 3,
+    "title": "Anya and the Puppy",
+    "moral": "kindness to animals",
+    "cast": [
+      "anya"
+    ]
   }
 ]

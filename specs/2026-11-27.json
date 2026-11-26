@@ -1,0 +1,549 @@
+{
+  "story": {
+    "plan": {
+      "feeling": "being insecure about your body",
+      "wish_or_worry": "wishing for smaller ears",
+      "quirk": "flapping his ears when he is nervous",
+      "turning_point": "using his big ears to fan a cool breeze for his tired friends",
+      "repeat_line": "Flap, flap, whoosh!"
+    },
+    "title": "Gappu's Big Ears",
+    "cast": [
+      "gappu",
+      "chiku",
+      "bandu"
+    ],
+    "moral_line": "Be proud of who you are!",
+    "question": "When does your child feel proud of themselves?",
+    "music": "playful",
+    "caption": "Do you ever wish your ears were smaller? 🐘\n\nHow does your little one celebrate what makes them unique?\n\nA new story every day ✨ Follow @kahani.time.kids\n\n#kahanitimekids #moralstories #kidsstories #bedtimestories #indiankids #selflove #elephant #toddlerlife",
+    "scenes": [
+      {
+        "bg": "jungle",
+        "narration": "Gappu the baby elephant looks at his huge ears and drops his head down low.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "centre",
+            "action": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "gappu",
+            "text": "Why are they big?"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "He sighs softly, wishing his ears were tiny and neat like a little elephant's.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "centre",
+            "action": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "gappu",
+            "text": "I want small ears."
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Gappu sees Chiku the bunny and Bandu the monkey sitting near the big trees.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "left",
+            "action": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "chiku",
+            "place": "centre_right",
+            "action": "idle",
+            "mood": "smile"
+          }
+        ],
+        "props": [],
+        "say": [],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Chiku has very small ears and Bandu has tiny ears, and Gappu watches them quietly.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "left",
+            "action": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "bandu",
+            "place": "right",
+            "action": "idle",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "gappu",
+            "text": "Just like theirs."
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "The jungle sun gets very hot, making Chiku and Bandu feel tired and sweaty.",
+        "chars": [
+          {
+            "who": "chiku",
+            "place": "left",
+            "action": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "bandu",
+            "place": "right",
+            "action": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "chiku",
+            "text": "So very hot today!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Bandu fans himself with his hand, wishing for a cool breeze in the trees.",
+        "chars": [
+          {
+            "who": "bandu",
+            "place": "centre",
+            "action": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "bandu",
+            "text": "Need some cool air."
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Gappu steps forward, lifts his huge ears, and flaps them hard with a big smile.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "centre",
+            "action": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "place": "right",
+            "action": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "gappu",
+            "text": "Flap, flap, whoosh!"
+          }
+        ],
+        "sparkle": true
+      },
+      {
+        "bg": "jungle",
+        "narration": "Whoosh, whoosh! A wonderful cool breeze blows across the jungle for his furry friends.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "centre",
+            "action": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "bandu",
+            "place": "left",
+            "action": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "bandu",
+            "text": "Ah, so nice!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Chiku and Bandu jump and cheer for Gappu and his wonderful cooling breeze.",
+        "chars": [
+          {
+            "who": "chiku",
+            "place": "left",
+            "action": "bounce",
+            "mood": "happy"
+          },
+          {
+            "who": "bandu",
+            "place": "right",
+            "action": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "chiku",
+            "text": "Best ears ever!"
+          }
+        ],
+        "sparkle": false
+      },
+      {
+        "bg": "jungle",
+        "narration": "Gappu stands tall and proud, knowing his big ears are just right for him.",
+        "chars": [
+          {
+            "who": "gappu",
+            "place": "centre",
+            "action": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "who": "gappu",
+            "text": "I love my ears!"
+          }
+        ],
+        "sparkle": true
+      }
+    ],
+    "story_no": 4,
+    "moral": "being proud of who you are"
+  },
+  "cartoon": {
+    "title": "Gappu's Big Ears",
+    "story_no": 4,
+    "cast": [
+      "gappu",
+      "chiku",
+      "bandu"
+    ],
+    "scenes": [
+      {
+        "type": "title",
+        "bg": "park",
+        "dur": 3.0
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 9.17,
+        "text": "Gappu the baby elephant looks at his huge ears and drops his head down low.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 540,
+            "act": "droop",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Why are they big?",
+            "at": 0.3,
+            "who": "gappu"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 8.62,
+        "text": "He sighs softly, wishing his ears were tiny and neat like a little elephant's.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 540,
+            "act": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "I want small ears.",
+            "at": 0.3,
+            "who": "gappu"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 8.09,
+        "text": "Gappu sees Chiku the bunny and Bandu the monkey sitting near the big trees.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 310,
+            "act": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "chiku",
+            "x": 770,
+            "act": "idle",
+            "mood": "smile"
+          }
+        ],
+        "props": [],
+        "say": [],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 9.01,
+        "text": "Chiku has very small ears and Bandu has tiny ears, and Gappu watches them quietly.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 310,
+            "act": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "bandu",
+            "x": 770,
+            "act": "idle",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Just like theirs.",
+            "at": 0.3,
+            "who": "gappu"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 6.45,
+        "text": "The jungle sun gets very hot, making Chiku and Bandu feel tired and sweaty.",
+        "chars": [
+          {
+            "who": "chiku",
+            "x": 310,
+            "act": "idle",
+            "mood": "sad"
+          },
+          {
+            "who": "bandu",
+            "x": 770,
+            "act": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "So very hot today!",
+            "at": 0.3,
+            "who": "chiku"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 8.52,
+        "text": "Bandu fans himself with his hand, wishing for a cool breeze in the trees.",
+        "chars": [
+          {
+            "who": "bandu",
+            "x": 540,
+            "act": "idle",
+            "mood": "sad"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Need some cool air.",
+            "at": 0.3,
+            "who": "bandu"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 8.58,
+        "text": "Gappu steps forward, lifts his huge ears, and flaps them hard with a big smile.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 310,
+            "act": "hero",
+            "mood": "happy"
+          },
+          {
+            "who": "chiku",
+            "x": 770,
+            "act": "bounce",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Flap, flap, whoosh!",
+            "at": 0.3,
+            "who": "gappu"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 7.86,
+        "text": "Whoosh, whoosh! A wonderful cool breeze blows across the jungle for his furry friends.",
+        "chars": [
+          {
+            "who": "bandu",
+            "x": 310,
+            "act": "jump",
+            "mood": "happy"
+          },
+          {
+            "who": "gappu",
+            "x": 770,
+            "act": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Ah, so nice!",
+            "at": 0.3,
+            "who": "bandu"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 7.25,
+        "text": "Chiku and Bandu jump and cheer for Gappu and his wonderful cooling breeze.",
+        "chars": [
+          {
+            "who": "chiku",
+            "x": 310,
+            "act": "bounce",
+            "mood": "happy"
+          },
+          {
+            "who": "bandu",
+            "x": 770,
+            "act": "jump",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "Best ears ever!",
+            "at": 0.3,
+            "who": "chiku"
+          }
+        ],
+        "sparkle": false,
+        "lead": 0.3
+      },
+      {
+        "type": "story",
+        "bg": "jungle",
+        "dur": 7.25,
+        "text": "Gappu stands tall and proud, knowing his big ears are just right for him.",
+        "chars": [
+          {
+            "who": "gappu",
+            "x": 540,
+            "act": "hero",
+            "mood": "happy"
+          }
+        ],
+        "props": [],
+        "say": [
+          {
+            "text": "I love my ears!",
+            "at": 0.3,
+            "who": "gappu"
+          }
+        ],
+        "sparkle": true,
+        "lead": 0.3
+      },
+      {
+        "type": "moral",
+        "bg": "park",
+        "dur": 4.5,
+        "text": "Be proud of who you are!",
+        "question": "When does your child feel proud of themselves?"
+      }
+    ]
+  }
+}

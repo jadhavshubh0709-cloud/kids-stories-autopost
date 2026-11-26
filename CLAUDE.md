@@ -15,7 +15,10 @@ Audience: parents of 3-8 year olds in India. Simple English, Indian setting. Cap
 2. `post-reel.yml` (7 PM IST) posts `reels/<today>/reel.mp4` + `caption.txt` to Instagram.
 - Secrets: `GEMINI_API_KEY` (no billing), `CF_ACCOUNT_ID`, `CF_API_TOKEN`, `IG_ACCESS_TOKEN`. Model names are env vars in `pipeline/gemini_api.py` (change there if Google renames models).
 - Offline test without API calls: `MOCK_GEMINI=1 python3 pipeline/make_story_reel.py --date 2000-01-01` (delete the output after).
-- `content/history.json` keeps used titles/morals so stories don't repeat.
+- `content/story_bank.json`: owner wants GOOD stories with a clear moral, so cartoon mode tells the next untold story from
+  this hand-written bank (AI only polishes words + stages scenes). When the bank runs out it falls back to AI-invented stories:
+  add more entries before that. Narration must only mention what is on screen.
+- `content/history.json` keeps used titles/morals (and bank `idea` ids) so stories don't repeat.
 
 ## Rules
 - Don't edit `src/`, secrets, or run `post-reel.yml` unless the owner asks.

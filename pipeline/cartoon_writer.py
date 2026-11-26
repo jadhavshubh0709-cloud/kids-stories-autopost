@@ -10,7 +10,9 @@ CHARACTERS you can use (pick 1-3 for this story, and prefer ones not used in rec
 {cast}
 Adults (Maa, Papa, Dadi, teacher) may be mentioned in narration but are never on screen.
 
-Write ONE new, original story, as a loved children's picture-book author would (think Julia Donaldson or a Pixar short).
+{source}
+
+Write the story as a loved children's picture-book author would (think Julia Donaldson or a Pixar short).
 - Moral to teach: {moral}
 - Gentle and kind: no villains, danger, punishment, brands or real people. Ends happily. Simple English, Indian everyday life.
 - Do not retell these recent stories: {recent}
@@ -80,15 +82,29 @@ PROP_PLACES = {"table": (540, 1160), "window": (790, 715), "ground_left": (150, 
 MAX_PROP_W = {"tree_mango": 1}
 
 
-def write(moral, recent_titles, n=5, recent_cast=()):
+def write(moral, recent_titles, n=5, recent_cast=(), idea=None):
     cast = "\n".join(f"  {k}: {v['name']} - {v['desc']}" for k, v in CAST.items())
+    if idea:
+        names = ", ".join(idea["cast"])
+        beats = "\n".join(f"  {i+1}. {b}" for i, b in enumerate(idea["beats"]))
+        source = (f'TELL THIS STORY (from our hand-picked story bank): "{idea["title"]}" - moral: {idea["moral"]}.\n'
+                  f"Use exactly these characters: {names}. Main background: {idea['bg']}.\n"
+                  f"Keep every event, in this order, one scene per beat ({len(idea['beats'])} scenes). "
+                  f"Keep the title. Make the narration warm and vivid; never change what happens.\n{beats}")
+        n = len(idea["beats"])
+    else:
+        source = "Write ONE new, original story."
     prompt = PROMPT.format(moral=moral, n=n, recent=", ".join(recent_titles[-30:]) or "none yet", cast=cast,
-                           recent_cast=", ".join(recent_cast) or "none")
+                           recent_cast=", ".join(recent_cast) or "none", source=source)
     last = []
     for _ in range(3):
         s = gemini_api.generate_json(prompt)
         last = check(s, n)
-        if not last: return s
+        if not last:
+            if idea:
+                s["title"] = idea["title"]; s["moral_line"] = idea["moral_line"]
+                s["cast"] = [c for c in idea["cast"] if c in CAST]
+            return s
         print("  story rejected:", "; ".join(last))
     raise gemini_api.ApiError("Could not get a valid cartoon story: " + "; ".join(last))
 
@@ -174,3 +190,13 @@ def add_moral(spec, story, dur):
     spec["scenes"].append({"type": "moral", "bg": "park", "dur": round(dur, 2), "text": story["moral_line"],
                            "question": story["question"]})
     return spec
+
+
+def next_idea(history, bank_path):
+    """Next story from content/story_bank.json that hasn't been told yet (None when the bank is used up)."""
+    import json, os
+    if not os.path.exists(bank_path): return None
+    used = {h.get("idea") for h in history} | {h.get("title") for h in history}
+    for idea in json.load(open(bank_path, encoding="utf-8")):
+        if idea["id"] not in used and idea["title"] not in used: return idea
+    return None

@@ -44,7 +44,9 @@ def make_clip_with_retry(prompt, refs, out, resolution):
 def make_cartoon(date, moral, history, n, work, out_dir):
     """FREE default: AI story + AI staging -> animated cartoon (characters really move) + free AI narrator."""
     recent_cast = [c for h in history[-4:] for c in h.get("cast", [])]
-    story = cartoon_writer.write(moral, [h["title"] for h in history], n, recent_cast)
+    idea = cartoon_writer.next_idea(history, os.path.join(ROOT, "content", "story_bank.json"))
+    if idea: moral = idea["moral"]; print(f"  from story bank: {idea['title']}", flush=True)
+    story = cartoon_writer.write(moral, [h["title"] for h in history], n, recent_cast, idea=idea)
     story_no = (history[-1]["story_no"] + 1) if history else 1
     story.update(story_no=story_no, moral=moral)
     if story.get("music") not in ("playful", "gentle", "adventure"): story["music"] = "playful"
@@ -73,7 +75,8 @@ def make_cartoon(date, moral, history, n, work, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     total = assemble.mix_voices(silent, tracks, os.path.join(ROOT, "music", story["music"] + ".m4a"), os.path.join(out_dir, "reel.mp4"))
     open(os.path.join(out_dir, "caption.txt"), "w").write(story["caption"].strip() + "\n")
-    history.append({"date": date, "story_no": story_no, "title": story["title"], "moral": moral, "cast": spec.get("cast", [])})
+    history.append({"date": date, "story_no": story_no, "title": story["title"], "moral": moral, "cast": spec.get("cast", []),
+                    **({"idea": idea["id"]} if idea else {})})
     json.dump(history, open(HISTORY, "w"), indent=2, ensure_ascii=False)
     shutil.rmtree(work, ignore_errors=True)
     print(f"  done: reels/{date}/reel.mp4 ({total:.1f}s, cartoon)", flush=True)

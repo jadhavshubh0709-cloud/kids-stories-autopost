@@ -27,8 +27,16 @@ WHAT MAKES IT A GOOD STORY (most important):
 - SHOW the moral through what happens. Never state it in the narration ("and so she learned that..." is forbidden).
 - Use one short repeated line or sound kids can say along (e.g. "Not yet, not yet!"), heard at least twice.
 - Every scene must move the story forward. Vivid simple words: sounds, colours, feelings.
+- The story must make sense to a parent watching: every event follows from the one before, and characters act
+  believably (animals eat what they really eat: no mango for a puppy; a puppy wants a ball or a pat).
+- MATCH THE PICTURES: narration may only mention people, animals, places and objects that are ON SCREEN in that scene
+  (from the menus below). No benches, crowds, "her friends" or "everyone" unless those characters are shown.
+  If the story needs friends, put them on screen as cast characters (use 2-3 characters for most stories).
+  Don't describe colours or details the cartoon can't show (the puppy is light brown).
+- Speech bubbles must fit that exact moment and mood (a sad character doesn't say "Join the fun!").
 - Before answering, check: clear feeling? does the character change? would a parent feel something at the end?
-  is it clearly different from the recent stories? If not, rewrite it.
+  is it clearly different from the recent stories? does every sentence match what is on screen and make sense?
+  If not, rewrite it.
 
 - {n} story scenes. The cartoon can ONLY show what these menus allow, so build the story from them:
   backgrounds: home (room with window and low table), park, night (moon and stars), village (huts, dirt road),

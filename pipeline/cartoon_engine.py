@@ -552,9 +552,12 @@ def s_story(s, spec, t):
     for p in s.get("props", []):
         if p.get("layer", "back") == "back": place_prop(img, p, t)
     pos = {}
+    k = 0.86 if len(s.get("chars", [])) >= 3 else 1.0      # 3 characters: draw a bit smaller so nobody touches or gets cut
     for c in s.get("chars", []):
-        spr, x, y = kid_frame(c, t, s["dur"]); pos[c["who"]] = (x, y)
-        img.alpha_composite(spr, (int(x - CW / 2), int(y - CH)))
+        spr, x, y = kid_frame(c, t, s["dur"])
+        if k != 1.0: spr = spr.resize((int(CW * k), int(CH * k)), Image.LANCZOS)
+        pos[c["who"]] = (x, y - CH * (1 - k))
+        img.alpha_composite(spr, (int(x - CW * k / 2), int(y - CH * k)))
     for p in s.get("props", []):
         if p.get("layer") == "front": place_prop(img, p, t)
     if s.get("sparkle"): sparkles(img, t, seed=len(s["text"]))

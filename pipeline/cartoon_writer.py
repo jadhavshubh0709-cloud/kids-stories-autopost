@@ -122,24 +122,27 @@ def check(s, n):
 
 
 def _place_chars(chars):
-    """Turn the model's character choices into positions; keep everyone apart and inside the frame."""
-    out, taken = [], []
-    slots = [260, 540, 820] if len(chars) >= 3 else [270, 810]
-    for c in chars[:3]:
-        if c.get("who") not in CAST: continue
-        x = PLACES_X.get(c.get("place"), slots[len(out) % len(slots)])
-        if any(abs(x - t) < 230 for t in taken):
-            x = next((sx for sx in slots + [540, 390, 690] if all(abs(sx - t) >= 230 for t in taken)), x)
+    """Turn the model's character choices into positions. Characters keep the model's left-to-right order but always
+    get evenly spaced, fixed slots, so nobody overlaps (the elephant is wide) and nobody is cut at the frame edge."""
+    chosen = [c for c in chars[:3] if c.get("who") in CAST]
+    slots = {1: [540], 2: [310, 770], 3: [205, 540, 875]}.get(len(chosen), [540])
+    chosen.sort(key=lambda c: PLACES_X.get(c.get("place"), 540))
+    out = []
+    for c, x in zip(chosen, slots):
         act = c.get("action") if c.get("action") in ACTS else "idle"
         mood = c.get("mood") if c.get("mood") in MOODS else "smile"
         o = {"who": c["who"], "x": x, "act": act, "mood": mood}
         if act == "walk":
-            to = PLACES_X.get(c.get("walk_to"), 540)
-            if abs(to - x) < 150 or any(abs(to - t) < 200 for t in taken):
+            # walk in from a little further out to the character's own slot, so walkers never cross other characters
+            if len(chosen) == 1:
+                start = 260 if PLACES_X.get(c.get("walk_to"), 540) >= PLACES_X.get(c.get("place"), 540) else 820
+            else:
+                start = None if len(chosen) == 3 and x == 540 else (x - 100 if x < 540 else x + 100)
+            if start is None or not 200 <= start <= 880:
                 o["act"] = "bounce"
             else:
-                o.update(from_x=x, to_x=to, x=to, face="right" if to > x else "left")
-        taken.append(o["x"]); out.append(o)
+                o.update(from_x=start, to_x=x, face="right" if x > start else "left")
+        out.append(o)
     return out
 
 

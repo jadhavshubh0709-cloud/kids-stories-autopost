@@ -10,10 +10,26 @@ CHARACTERS you can use (pick 1-3 for this story, and prefer ones not used in rec
 {cast}
 Adults (Maa, Papa, Dadi, teacher) may be mentioned in narration but are never on screen.
 
-Write ONE new, original story.
+Write ONE new, original story, as a loved children's picture-book author would (think Julia Donaldson or a Pixar short).
 - Moral to teach: {moral}
 - Gentle and kind: no villains, danger, punishment, brands or real people. Ends happily. Simple English, Indian everyday life.
 - Do not retell these recent stories: {recent}
+
+WHAT MAKES IT A GOOD STORY (most important):
+- Build it around ONE small, real feeling every child knows: feeling left out, being too small, losing a game,
+  breaking something, being jealous, shy on the first day, wanting something RIGHT NOW, being scared of the dark.
+- Give it a specific, surprising situation, not a generic "they played and shared" or "she saw a hungry animal and fed it".
+- Give the main character one wish or worry and one lovable quirk (always counting things, giggles like hiccups...).
+- Shape: scene 1 = hook (character + problem in the first sentence, make kids curious);
+  middle = the character tries, it goes wrong or feels hard, the feeling grows;
+  turning point = the character CHOOSES the kind / brave / honest thing themselves (no adult fixes it);
+  last scene = a warm ending that makes a parent smile (a hug, a shared laugh, a cosy image).
+- SHOW the moral through what happens. Never state it in the narration ("and so she learned that..." is forbidden).
+- Use one short repeated line or sound kids can say along (e.g. "Not yet, not yet!"), heard at least twice.
+- Every scene must move the story forward. Vivid simple words: sounds, colours, feelings.
+- Before answering, check: clear feeling? does the character change? would a parent feel something at the end?
+  is it clearly different from the recent stories? If not, rewrite it.
+
 - {n} story scenes. The cartoon can ONLY show what these menus allow, so build the story from them:
   backgrounds: home (room with window and low table), park, night (moon and stars), village (huts, dirt road),
                school (classroom with blackboard and a low table), jungle (big trees)
@@ -28,10 +44,12 @@ Write ONE new, original story.
 
 Return JSON only:
 {{
-  "title": "3-5 word catchy title",
+  "plan": {{"feeling": "the one feeling the story is about", "wish_or_worry": "...", "quirk": "...",
+            "turning_point": "what the character chooses to do", "repeat_line": "the say-along line"}},
+  "title": "3-5 word catchy title that makes people curious",
   "cast": ["ids of the characters in this story"],
   "moral_line": "the lesson in at most 6 simple words",
-  "question": "one short question for parents to answer in the comments",
+  "question": "one short question for parents about their own child and this feeling",
   "music": "playful" or "gentle" or "adventure",
   "caption": "1 hook line with 1-2 emoji, blank line, a question for parents, blank line, 'A new story every day ✨ Follow @kahani.time.kids', blank line, 8 hashtags ending with #kahanitimekids",
   "scenes": [

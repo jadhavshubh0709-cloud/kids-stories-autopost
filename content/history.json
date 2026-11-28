@@ -45,5 +45,17 @@
       "aarav"
     ],
     "idea": "not-yet-mango"
+  },
+  {
+    "date": "2026-11-28",
+    "story_no": 6,
+    "title": "The Kite in the Tree",
+    "moral": "teamwork",
+    "cast": [
+      "veer",
+      "veera",
+      "gappu"
+    ],
+    "idea": "kite-in-tree"
   }
 ]
